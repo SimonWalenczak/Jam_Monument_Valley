@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class BlockController : MonoBehaviour
 
     [field: Space, Header("Offsets"), SerializeField] public float walkPointOffset { get; private set; }
     [field: SerializeField] public float stairOffset { get; private set; }
-
+  
     #endregion
 
     #region Methods
@@ -46,9 +47,15 @@ public class BlockController : MonoBehaviour
     #endregion
 }
 
-[System.Serializable]
+[Serializable]
 public class WalkPath
 {
     public Transform target;
     public bool active = true;
+
+    public WalkPath(Transform targetPos, bool active)
+    {
+        this.target = targetPos.transform;
+        this.active = true;
+    }
 }

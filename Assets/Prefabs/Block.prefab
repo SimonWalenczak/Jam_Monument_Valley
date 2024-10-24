@@ -105,6 +105,11 @@ MonoBehaviour:
   <DontRotate>k__BackingField: 0
   <walkPointOffset>k__BackingField: 0.5
   <stairOffset>k__BackingField: 0.4
+  <DetectBlockDirections>k__BackingField:
+  - {x: 1, y: 1}
+  - {x: 1, y: -1}
+  - {x: -1, y: -1}
+  - {x: -1, y: 1}
 --- !u!64 &2184091512496835480
 MeshCollider:
   m_ObjectHideFlags: 0
