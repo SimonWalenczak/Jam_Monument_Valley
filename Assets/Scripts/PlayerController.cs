@@ -10,15 +10,13 @@ public class PlayerController : MonoBehaviour
 {
     #region Properties
 
-    [field: SerializeField] public bool Walking { get; private set; }
     [field: Space, SerializeField] public Transform CurrentCube { get; private set; }
     [field: SerializeField] public Transform ClickedCube { get; private set; }
     [field: SerializeField] public GameObject Cursor { get; private set; }
     [field: SerializeField] public Transform Indicator { get; private set; }
     [field: Space, SerializeField] public List<Transform> FinalPath { get; private set; }
 
-    public bool IsMoving;
-    
+
     private BlockController _selectedBlock;
 
     public Action<int> OnMoveCursor;
@@ -26,7 +24,9 @@ public class PlayerController : MonoBehaviour
 
     private bool _isStarted;
     private bool _isMovingCursor;
-    
+    private bool _isDefineTargetBlock;
+    private bool _walking;
+
     #endregion
 
     #region Methods
@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         RayCastDown();
+
+        Indicator.transform.parent = null;
+        Cursor.transform.parent = null;
     }
 
     private void Update()
@@ -51,6 +54,10 @@ public class PlayerController : MonoBehaviour
 
     private void SelectBlock()
     {
+        if (_walking || _isDefineTargetBlock) return;
+
+        _isDefineTargetBlock = true;
+
         ClickedCube = _selectedBlock.transform;
         DOTween.Kill(gameObject.transform);
         FinalPath.Clear();
@@ -67,10 +74,10 @@ public class PlayerController : MonoBehaviour
     private void MoveCursor(int index)
     {
         if (_isMovingCursor) return;
-        
+
         _isMovingCursor = true;
         StartCoroutine(ResetCursorTimer());
-        
+
         if (_selectedBlock.PossiblePaths[index].target != null)
         {
             _selectedBlock = _selectedBlock.PossiblePaths[index].target.GetComponent<BlockController>();
@@ -98,15 +105,21 @@ public class PlayerController : MonoBehaviour
 
         foreach (WalkPath path in CurrentCube.GetComponent<BlockController>().PossiblePaths)
         {
-            if (path.active)
+            if (path.target != null)
             {
-                nextCubes.Add(path.target);
-                path.target.GetComponent<BlockController>().PreviousBlock = CurrentCube;
+                Debug.Log("Target exist");
+                if (path.active)
+                {
+                    Debug.Log("Path is active");
+                    nextCubes.Add(path.target);
+                    path.target.GetComponent<BlockController>().PreviousBlock = CurrentCube;
+                }
             }
         }
 
         pastCubes.Add(CurrentCube);
 
+        Debug.Log(nextCubes.Count);
         ExploreCube(nextCubes, pastCubes);
         BuildPath();
     }
@@ -123,10 +136,13 @@ public class PlayerController : MonoBehaviour
 
         foreach (WalkPath path in current.GetComponent<BlockController>().PossiblePaths)
         {
-            if (!visitedCubes.Contains(path.target) && path.active)
+            if (path.target != null)
             {
-                nextCubes.Add(path.target);
-                path.target.GetComponent<BlockController>().PreviousBlock = current;
+                if (!visitedCubes.Contains(path.target) && path.active)
+                {
+                    nextCubes.Add(path.target);
+                    path.target.GetComponent<BlockController>().PreviousBlock = current;
+                }
             }
         }
 
@@ -159,7 +175,7 @@ public class PlayerController : MonoBehaviour
     {
         Sequence s = DOTween.Sequence();
 
-        Walking = true;
+        _walking = true;
 
         for (int i = FinalPath.Count - 1; i > 0; i--)
         {
@@ -187,7 +203,8 @@ public class PlayerController : MonoBehaviour
         }
 
         FinalPath.Clear();
-        Walking = false;
+        _walking = false;
+        _isDefineTargetBlock = false;
     }
 
     #endregion

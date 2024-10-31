@@ -50,6 +50,9 @@ namespace Character
 
             if (context.action.name == _gameplayInputs.Player.MoveWest.name)
                 inputsEnum.MoveWest = context.ReadValue<float>() > DeadzoneJoystickTrigger;
+            
+            if (context.action.name == _gameplayInputs.Player.ClickBlock.name)
+                inputsEnum.ClickBlock = context.ReadValue<float>() > DeadzoneJoystickTrigger;
 
             inputsEnum.Deadzone = DeadzoneJoystick;
 
@@ -64,6 +67,8 @@ namespace Character
         public bool MoveSouth;
         public bool MoveEast;
         public bool MoveWest;
+
+        public bool ClickBlock;
         
         public float Deadzone;
     }

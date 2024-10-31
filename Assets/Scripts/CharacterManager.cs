@@ -36,6 +36,11 @@ namespace Character
             {
                 PlayerController.OnMoveCursor.Invoke(3);
             }
+
+            if (InputManagementProperty.Inputs.ClickBlock)
+            {
+                PlayerController.OnSelectBlock.Invoke();
+            }
         }
     }
 }

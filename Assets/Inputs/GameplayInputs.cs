@@ -64,6 +64,15 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""ClickBlock"",
+                    ""type"": ""Button"",
+                    ""id"": ""fae38b93-94d6-497f-b234-6c0b1d4d994d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""ShowPauseMenus"",
                     ""type"": ""Button"",
                     ""id"": ""e412642b-f162-4c33-9f57-0efea12c64c4"",
@@ -181,6 +190,28 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MoveWest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c2a94e1-6c15-4610-a787-43b97a8e8303"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClickBlock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56f4a400-2de0-4d1b-97c2-8c56c335d559"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClickBlock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -309,6 +340,7 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         m_Player_MoveSouth = m_Player.FindAction("MoveSouth", throwIfNotFound: true);
         m_Player_MoveEast = m_Player.FindAction("MoveEast", throwIfNotFound: true);
         m_Player_MoveWest = m_Player.FindAction("MoveWest", throwIfNotFound: true);
+        m_Player_ClickBlock = m_Player.FindAction("ClickBlock", throwIfNotFound: true);
         m_Player_ShowPauseMenus = m_Player.FindAction("ShowPauseMenus", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
@@ -379,6 +411,7 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MoveSouth;
     private readonly InputAction m_Player_MoveEast;
     private readonly InputAction m_Player_MoveWest;
+    private readonly InputAction m_Player_ClickBlock;
     private readonly InputAction m_Player_ShowPauseMenus;
     public struct PlayerActions
     {
@@ -388,6 +421,7 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         public InputAction @MoveSouth => m_Wrapper.m_Player_MoveSouth;
         public InputAction @MoveEast => m_Wrapper.m_Player_MoveEast;
         public InputAction @MoveWest => m_Wrapper.m_Player_MoveWest;
+        public InputAction @ClickBlock => m_Wrapper.m_Player_ClickBlock;
         public InputAction @ShowPauseMenus => m_Wrapper.m_Player_ShowPauseMenus;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -410,6 +444,9 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
             @MoveWest.started += instance.OnMoveWest;
             @MoveWest.performed += instance.OnMoveWest;
             @MoveWest.canceled += instance.OnMoveWest;
+            @ClickBlock.started += instance.OnClickBlock;
+            @ClickBlock.performed += instance.OnClickBlock;
+            @ClickBlock.canceled += instance.OnClickBlock;
             @ShowPauseMenus.started += instance.OnShowPauseMenus;
             @ShowPauseMenus.performed += instance.OnShowPauseMenus;
             @ShowPauseMenus.canceled += instance.OnShowPauseMenus;
@@ -429,6 +466,9 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
             @MoveWest.started -= instance.OnMoveWest;
             @MoveWest.performed -= instance.OnMoveWest;
             @MoveWest.canceled -= instance.OnMoveWest;
+            @ClickBlock.started -= instance.OnClickBlock;
+            @ClickBlock.performed -= instance.OnClickBlock;
+            @ClickBlock.canceled -= instance.OnClickBlock;
             @ShowPauseMenus.started -= instance.OnShowPauseMenus;
             @ShowPauseMenus.performed -= instance.OnShowPauseMenus;
             @ShowPauseMenus.canceled -= instance.OnShowPauseMenus;
@@ -509,6 +549,7 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         void OnMoveSouth(InputAction.CallbackContext context);
         void OnMoveEast(InputAction.CallbackContext context);
         void OnMoveWest(InputAction.CallbackContext context);
+        void OnClickBlock(InputAction.CallbackContext context);
         void OnShowPauseMenus(InputAction.CallbackContext context);
     }
     public interface IMenuActions
