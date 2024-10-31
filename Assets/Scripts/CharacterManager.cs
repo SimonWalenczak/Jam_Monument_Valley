@@ -8,7 +8,6 @@ namespace Character
 
         [field: SerializeField] public PlayerController PlayerController { get; private set; }
         [field: SerializeField] public InputManagement InputManagementProperty { get; private set; }
-        [field: SerializeField] public Animator CharacterAnimatorProperty { get; private set; }
 
         #endregion
 

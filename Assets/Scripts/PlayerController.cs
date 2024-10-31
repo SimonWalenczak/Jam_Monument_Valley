@@ -16,8 +16,9 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public Transform Indicator { get; private set; }
     [field: Space, SerializeField] public List<Transform> FinalPath { get; private set; }
 
-
     private BlockController _selectedBlock;
+
+    [SerializeField] private Animator _animator;
 
     public Action<int> OnMoveCursor;
     public Action OnSelectBlock;
@@ -25,7 +26,7 @@ public class PlayerController : MonoBehaviour
     private bool _isStarted;
     private bool _isMovingCursor;
     private bool _isDefineTargetBlock;
-    private bool _walking;
+    [SerializeField] private bool _isWalking;
 
     #endregion
 
@@ -39,6 +40,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        _animator = GetComponentInChildren<Animator>();
+
         RayCastDown();
 
         Indicator.transform.parent = null;
@@ -50,11 +53,13 @@ public class PlayerController : MonoBehaviour
         RayCastDown();
 
         transform.parent = CurrentCube.GetComponent<BlockController>().MovingGround ? CurrentCube.parent : null;
+
+        _animator.SetBool("IsWalking", _isWalking);
     }
 
     private void SelectBlock()
     {
-        if (_walking || _isDefineTargetBlock) return;
+        if (_isWalking || _isDefineTargetBlock) return;
 
         _isDefineTargetBlock = true;
 
@@ -107,10 +112,8 @@ public class PlayerController : MonoBehaviour
         {
             if (path.target != null)
             {
-                Debug.Log("Target exist");
                 if (path.active)
                 {
-                    Debug.Log("Path is active");
                     nextCubes.Add(path.target);
                     path.target.GetComponent<BlockController>().PreviousBlock = CurrentCube;
                 }
@@ -119,7 +122,6 @@ public class PlayerController : MonoBehaviour
 
         pastCubes.Add(CurrentCube);
 
-        Debug.Log(nextCubes.Count);
         ExploreCube(nextCubes, pastCubes);
         BuildPath();
     }
@@ -175,7 +177,7 @@ public class PlayerController : MonoBehaviour
     {
         Sequence s = DOTween.Sequence();
 
-        _walking = true;
+        _isWalking = true;
 
         for (int i = FinalPath.Count - 1; i > 0; i--)
         {
@@ -184,7 +186,9 @@ public class PlayerController : MonoBehaviour
             s.Append(transform.DOMove(FinalPath[i].GetComponent<BlockController>().GetWalkPoint(), .2f * time).SetEase(Ease.Linear));
 
             if (!FinalPath[i].GetComponent<BlockController>().DontRotate)
+            {
                 s.Join(transform.DOLookAt(FinalPath[i].position, .1f, AxisConstraint.Y, Vector3.up));
+            }
         }
 
         if (ClickedCube.GetComponent<BlockController>().IsButton)
@@ -203,7 +207,7 @@ public class PlayerController : MonoBehaviour
         }
 
         FinalPath.Clear();
-        _walking = false;
+        _isWalking = false;
         _isDefineTargetBlock = false;
     }
 

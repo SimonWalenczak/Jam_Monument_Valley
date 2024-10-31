@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    // [field: SerializeField] public PlayerController Player { get; private set; }
     [field: SerializeField] public List<PathCondition> PathConditions = new List<PathCondition>();
     [field: SerializeField] public List<Transform> Pivots;
 
@@ -46,9 +45,6 @@ public class GameManager : MonoBehaviour
             foreach (SinglePath sp in pc.paths)
                 sp.block.PossiblePaths[sp.index].active = (count == pc.conditions.Count);
         }
-
-        // if (Player.Walking)
-        //     return;
 
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
         {

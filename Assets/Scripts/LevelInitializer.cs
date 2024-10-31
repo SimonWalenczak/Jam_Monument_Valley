@@ -16,11 +16,8 @@ public class InitializeLevel : MonoBehaviour
             player.GetComponentInChildren<InputManagement>().InitializePlayer(playerConfigs[i]);
 
             Transform placeForCharacterPlayer = player.transform;
-
-            Vector3 eulerAngles = new Vector3(0, 90, 0);
-            Quaternion quaternion = Quaternion.Euler(eulerAngles);
             
-            GameObject characterPlayer = Instantiate(playerConfigs[i].MeshPlayer, placeForCharacterPlayer.position, quaternion,
+            GameObject characterPlayer = Instantiate(playerConfigs[i].MeshPlayer, placeForCharacterPlayer.position, Quaternion.identity,
                 placeForCharacterPlayer.transform);
         }
     }
