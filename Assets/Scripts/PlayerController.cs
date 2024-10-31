@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
         transform.parent = CurrentCube.GetComponent<BlockController>().MovingGround ? CurrentCube.parent : null;
 
         _animator.SetBool("IsWalking", _isWalking);
+
+        _isDefineTargetBlock = _selectedBlock.gameObject == CurrentCube.gameObject;
     }
 
     private void SelectBlock()
