@@ -1,9 +1,11 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Character;
 using UnityEngine;
 using DG.Tweening;
 
-[SelectionBase]
 public class PlayerController : MonoBehaviour
 {
     #region Properties
@@ -11,12 +13,29 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public bool Walking { get; private set; }
     [field: Space, SerializeField] public Transform CurrentCube { get; private set; }
     [field: SerializeField] public Transform ClickedCube { get; private set; }
+    [field: SerializeField] public GameObject Cursor { get; private set; }
     [field: SerializeField] public Transform Indicator { get; private set; }
     [field: Space, SerializeField] public List<Transform> FinalPath { get; private set; }
 
+    public bool IsMoving;
+    
+    private BlockController _selectedBlock;
+
+    public Action<int> OnMoveCursor;
+    public Action OnSelectBlock;
+
+    private bool _isStarted;
+    private bool _isMovingCursor;
+    
     #endregion
 
     #region Methods
+
+    private void Awake()
+    {
+        OnSelectBlock += SelectBlock;
+        OnMoveCursor += MoveCursor;
+    }
 
     private void Start()
     {
@@ -27,39 +46,50 @@ public class PlayerController : MonoBehaviour
     {
         RayCastDown();
 
-        if (CurrentCube.GetComponent<BlockController>().MovingGround)
+        transform.parent = CurrentCube.GetComponent<BlockController>().MovingGround ? CurrentCube.parent : null;
+    }
+
+    private void SelectBlock()
+    {
+        ClickedCube = _selectedBlock.transform;
+        DOTween.Kill(gameObject.transform);
+        FinalPath.Clear();
+        FindPath();
+
+        Indicator.position = _selectedBlock.GetWalkPoint();
+        Sequence s = DOTween.Sequence();
+        s.AppendCallback(() => Indicator.GetComponentInChildren<ParticleSystem>().Play());
+        s.Append(Indicator.GetComponent<Renderer>().material.DOColor(Color.white, .1f));
+        s.Append(Indicator.GetComponent<Renderer>().material.DOColor(Color.black, .3f).SetDelay(.2f));
+        s.Append(Indicator.GetComponent<Renderer>().material.DOColor(Color.clear, .3f));
+    }
+
+    private void MoveCursor(int index)
+    {
+        if (_isMovingCursor) return;
+        
+        _isMovingCursor = true;
+        StartCoroutine(ResetCursorTimer());
+        
+        if (_selectedBlock.PossiblePaths[index].target != null)
         {
-            transform.parent = CurrentCube.parent;
+            _selectedBlock = _selectedBlock.PossiblePaths[index].target.GetComponent<BlockController>();
+            Cursor.transform.position = new Vector3(_selectedBlock.transform.position.x, _selectedBlock.transform.position.y + _selectedBlock.walkPointOffset,
+                _selectedBlock.transform.position.z);
         }
         else
         {
-            transform.parent = null;
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit mouseHit;
-
-            if (Physics.Raycast(mouseRay, out mouseHit))
-            {
-                if (mouseHit.transform.GetComponent<BlockController>() != null)
-                {
-                    ClickedCube = mouseHit.transform;
-                    DOTween.Kill(gameObject.transform);
-                    FinalPath.Clear();
-                    FindPath();
-
-                    Indicator.position = mouseHit.transform.GetComponent<BlockController>().GetWalkPoint();
-                    Sequence s = DOTween.Sequence();
-                    s.AppendCallback(() => Indicator.GetComponentInChildren<ParticleSystem>().Play());
-                    s.Append(Indicator.GetComponent<Renderer>().material.DOColor(Color.white, .1f));
-                    s.Append(Indicator.GetComponent<Renderer>().material.DOColor(Color.black, .3f).SetDelay(.2f));
-                    s.Append(Indicator.GetComponent<Renderer>().material.DOColor(Color.clear, .3f));
-                }
-            }
+            Debug.Log("There is no Block Controller at this position");
         }
     }
+
+    IEnumerator ResetCursorTimer()
+    {
+        yield return new WaitForSeconds(0.2f);
+        _isMovingCursor = false;
+    }
+
+    #region PathFinding
 
     private void FindPath()
     {
@@ -160,6 +190,8 @@ public class PlayerController : MonoBehaviour
         Walking = false;
     }
 
+    #endregion
+
     private void RayCastDown()
     {
         Ray playerRay = new Ray(transform.GetChild(0).position, -transform.up);
@@ -170,6 +202,12 @@ public class PlayerController : MonoBehaviour
             if (playerHit.transform.GetComponent<BlockController>() != null)
             {
                 CurrentCube = playerHit.transform;
+
+                if (_isStarted == false)
+                {
+                    _selectedBlock = CurrentCube.GetComponent<BlockController>();
+                    _isStarted = true;
+                }
             }
         }
     }

@@ -24,12 +24,12 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
     ""name"": ""GameplayInputs"",
     ""maps"": [
         {
-            ""name"": ""Boat"",
+            ""name"": ""Player"",
             ""id"": ""be6c4bf5-cce8-4353-ac99-d5a013e6256a"",
             ""actions"": [
                 {
-                    ""name"": ""PaddleLeft"",
-                    ""type"": ""Value"",
+                    ""name"": ""MoveNorth"",
+                    ""type"": ""Button"",
                     ""id"": ""ec7d4462-88fd-4f43-8928-11e27232ea53"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -37,8 +37,8 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""PaddleRight"",
-                    ""type"": ""Value"",
+                    ""name"": ""MoveSouth"",
+                    ""type"": ""Button"",
                     ""id"": ""90c3aca1-1a2b-4b05-a9a6-0ecf98f6952b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -46,21 +46,21 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""StaticRotateLeft"",
-                    ""type"": ""Value"",
-                    ""id"": ""31fcf997-f244-4d71-9596-0801daf74d3f"",
-                    ""expectedControlType"": ""Analog"",
+                    ""name"": ""MoveEast"",
+                    ""type"": ""Button"",
+                    ""id"": ""73cffe50-c322-4fb9-abca-558083ba5c9c"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=0.1)"",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""StaticRotateRight"",
-                    ""type"": ""Value"",
-                    ""id"": ""68f74b2f-e772-4377-9710-58135b74f550"",
-                    ""expectedControlType"": ""Analog"",
+                    ""name"": ""MoveWest"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8d500fa-47da-4058-8b0d-e707024e92ed"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=0.1)"",
                     ""initialStateCheck"": true
                 },
                 {
@@ -71,112 +71,50 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""ClosePauseMenu"",
-                    ""type"": ""Button"",
-                    ""id"": ""f48ba92a-5447-4450-a90e-df13a3299c44"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Select"",
-                    ""type"": ""Button"",
-                    ""id"": ""dfb9414c-c276-4c79-83b2-8ec296af8ff3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""3cfa1491-41a9-4ca7-a280-5a43d52d446e"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PaddleLeft"",
+                    ""action"": ""MoveNorth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""ecc743e3-3393-43b9-8bb9-fc74b1d7df00"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PaddleLeft"",
+                    ""action"": ""MoveNorth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""84d99ad0-1484-4aab-991c-2d9fa37ffddc"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PaddleRight"",
+                    ""action"": ""MoveSouth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""552cac4e-9249-4cbe-9e57-4af35a458181"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PaddleRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""98e456ff-58ef-4d20-bd85-6f2f8c69cc97"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""StaticRotateLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9080299f-91ab-47cf-883d-fb860410a663"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""StaticRotateLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""62a3c127-3f1f-4b5a-9e99-e4c86b6c0755"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""StaticRotateRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5ef8087e-4505-4945-aeb6-aff821b2bc0b"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""StaticRotateRight"",
+                    ""action"": ""MoveSouth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -204,34 +142,45 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2f4b7ad8-800c-4c04-87da-2b3dd3799b34"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
+                    ""id"": ""017cf7cf-4873-4b5d-96fb-7ee66d0562ad"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ClosePauseMenu"",
+                    ""action"": ""MoveEast"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b68a0eb7-af81-45d6-9b19-835631d26b93"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
+                    ""id"": ""0afe1dae-d4ca-4b75-8f45-5cff4abc5dc1"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ClosePauseMenu"",
+                    ""action"": ""MoveEast"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""da726fee-f16f-4623-b6cf-eca200a6ccbc"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""id"": ""12895781-0125-46b1-99c1-975f7f24c953"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Select"",
+                    ""action"": ""MoveWest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""761f79dc-7d53-4906-a9fa-980e6c0af36f"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveWest"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -354,15 +303,13 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // Boat
-        m_Boat = asset.FindActionMap("Boat", throwIfNotFound: true);
-        m_Boat_PaddleLeft = m_Boat.FindAction("PaddleLeft", throwIfNotFound: true);
-        m_Boat_PaddleRight = m_Boat.FindAction("PaddleRight", throwIfNotFound: true);
-        m_Boat_StaticRotateLeft = m_Boat.FindAction("StaticRotateLeft", throwIfNotFound: true);
-        m_Boat_StaticRotateRight = m_Boat.FindAction("StaticRotateRight", throwIfNotFound: true);
-        m_Boat_ShowPauseMenus = m_Boat.FindAction("ShowPauseMenus", throwIfNotFound: true);
-        m_Boat_ClosePauseMenu = m_Boat.FindAction("ClosePauseMenu", throwIfNotFound: true);
-        m_Boat_Select = m_Boat.FindAction("Select", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_MoveNorth = m_Player.FindAction("MoveNorth", throwIfNotFound: true);
+        m_Player_MoveSouth = m_Player.FindAction("MoveSouth", throwIfNotFound: true);
+        m_Player_MoveEast = m_Player.FindAction("MoveEast", throwIfNotFound: true);
+        m_Player_MoveWest = m_Player.FindAction("MoveWest", throwIfNotFound: true);
+        m_Player_ShowPauseMenus = m_Player.FindAction("ShowPauseMenus", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
@@ -425,99 +372,83 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Boat
-    private readonly InputActionMap m_Boat;
-    private List<IBoatActions> m_BoatActionsCallbackInterfaces = new List<IBoatActions>();
-    private readonly InputAction m_Boat_PaddleLeft;
-    private readonly InputAction m_Boat_PaddleRight;
-    private readonly InputAction m_Boat_StaticRotateLeft;
-    private readonly InputAction m_Boat_StaticRotateRight;
-    private readonly InputAction m_Boat_ShowPauseMenus;
-    private readonly InputAction m_Boat_ClosePauseMenu;
-    private readonly InputAction m_Boat_Select;
-    public struct BoatActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+    private readonly InputAction m_Player_MoveNorth;
+    private readonly InputAction m_Player_MoveSouth;
+    private readonly InputAction m_Player_MoveEast;
+    private readonly InputAction m_Player_MoveWest;
+    private readonly InputAction m_Player_ShowPauseMenus;
+    public struct PlayerActions
     {
         private @GameplayInputs m_Wrapper;
-        public BoatActions(@GameplayInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PaddleLeft => m_Wrapper.m_Boat_PaddleLeft;
-        public InputAction @PaddleRight => m_Wrapper.m_Boat_PaddleRight;
-        public InputAction @StaticRotateLeft => m_Wrapper.m_Boat_StaticRotateLeft;
-        public InputAction @StaticRotateRight => m_Wrapper.m_Boat_StaticRotateRight;
-        public InputAction @ShowPauseMenus => m_Wrapper.m_Boat_ShowPauseMenus;
-        public InputAction @ClosePauseMenu => m_Wrapper.m_Boat_ClosePauseMenu;
-        public InputAction @Select => m_Wrapper.m_Boat_Select;
-        public InputActionMap Get() { return m_Wrapper.m_Boat; }
+        public PlayerActions(@GameplayInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoveNorth => m_Wrapper.m_Player_MoveNorth;
+        public InputAction @MoveSouth => m_Wrapper.m_Player_MoveSouth;
+        public InputAction @MoveEast => m_Wrapper.m_Player_MoveEast;
+        public InputAction @MoveWest => m_Wrapper.m_Player_MoveWest;
+        public InputAction @ShowPauseMenus => m_Wrapper.m_Player_ShowPauseMenus;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(BoatActions set) { return set.Get(); }
-        public void AddCallbacks(IBoatActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerActions instance)
         {
-            if (instance == null || m_Wrapper.m_BoatActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_BoatActionsCallbackInterfaces.Add(instance);
-            @PaddleLeft.started += instance.OnPaddleLeft;
-            @PaddleLeft.performed += instance.OnPaddleLeft;
-            @PaddleLeft.canceled += instance.OnPaddleLeft;
-            @PaddleRight.started += instance.OnPaddleRight;
-            @PaddleRight.performed += instance.OnPaddleRight;
-            @PaddleRight.canceled += instance.OnPaddleRight;
-            @StaticRotateLeft.started += instance.OnStaticRotateLeft;
-            @StaticRotateLeft.performed += instance.OnStaticRotateLeft;
-            @StaticRotateLeft.canceled += instance.OnStaticRotateLeft;
-            @StaticRotateRight.started += instance.OnStaticRotateRight;
-            @StaticRotateRight.performed += instance.OnStaticRotateRight;
-            @StaticRotateRight.canceled += instance.OnStaticRotateRight;
+            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+            @MoveNorth.started += instance.OnMoveNorth;
+            @MoveNorth.performed += instance.OnMoveNorth;
+            @MoveNorth.canceled += instance.OnMoveNorth;
+            @MoveSouth.started += instance.OnMoveSouth;
+            @MoveSouth.performed += instance.OnMoveSouth;
+            @MoveSouth.canceled += instance.OnMoveSouth;
+            @MoveEast.started += instance.OnMoveEast;
+            @MoveEast.performed += instance.OnMoveEast;
+            @MoveEast.canceled += instance.OnMoveEast;
+            @MoveWest.started += instance.OnMoveWest;
+            @MoveWest.performed += instance.OnMoveWest;
+            @MoveWest.canceled += instance.OnMoveWest;
             @ShowPauseMenus.started += instance.OnShowPauseMenus;
             @ShowPauseMenus.performed += instance.OnShowPauseMenus;
             @ShowPauseMenus.canceled += instance.OnShowPauseMenus;
-            @ClosePauseMenu.started += instance.OnClosePauseMenu;
-            @ClosePauseMenu.performed += instance.OnClosePauseMenu;
-            @ClosePauseMenu.canceled += instance.OnClosePauseMenu;
-            @Select.started += instance.OnSelect;
-            @Select.performed += instance.OnSelect;
-            @Select.canceled += instance.OnSelect;
         }
 
-        private void UnregisterCallbacks(IBoatActions instance)
+        private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @PaddleLeft.started -= instance.OnPaddleLeft;
-            @PaddleLeft.performed -= instance.OnPaddleLeft;
-            @PaddleLeft.canceled -= instance.OnPaddleLeft;
-            @PaddleRight.started -= instance.OnPaddleRight;
-            @PaddleRight.performed -= instance.OnPaddleRight;
-            @PaddleRight.canceled -= instance.OnPaddleRight;
-            @StaticRotateLeft.started -= instance.OnStaticRotateLeft;
-            @StaticRotateLeft.performed -= instance.OnStaticRotateLeft;
-            @StaticRotateLeft.canceled -= instance.OnStaticRotateLeft;
-            @StaticRotateRight.started -= instance.OnStaticRotateRight;
-            @StaticRotateRight.performed -= instance.OnStaticRotateRight;
-            @StaticRotateRight.canceled -= instance.OnStaticRotateRight;
+            @MoveNorth.started -= instance.OnMoveNorth;
+            @MoveNorth.performed -= instance.OnMoveNorth;
+            @MoveNorth.canceled -= instance.OnMoveNorth;
+            @MoveSouth.started -= instance.OnMoveSouth;
+            @MoveSouth.performed -= instance.OnMoveSouth;
+            @MoveSouth.canceled -= instance.OnMoveSouth;
+            @MoveEast.started -= instance.OnMoveEast;
+            @MoveEast.performed -= instance.OnMoveEast;
+            @MoveEast.canceled -= instance.OnMoveEast;
+            @MoveWest.started -= instance.OnMoveWest;
+            @MoveWest.performed -= instance.OnMoveWest;
+            @MoveWest.canceled -= instance.OnMoveWest;
             @ShowPauseMenus.started -= instance.OnShowPauseMenus;
             @ShowPauseMenus.performed -= instance.OnShowPauseMenus;
             @ShowPauseMenus.canceled -= instance.OnShowPauseMenus;
-            @ClosePauseMenu.started -= instance.OnClosePauseMenu;
-            @ClosePauseMenu.performed -= instance.OnClosePauseMenu;
-            @ClosePauseMenu.canceled -= instance.OnClosePauseMenu;
-            @Select.started -= instance.OnSelect;
-            @Select.performed -= instance.OnSelect;
-            @Select.canceled -= instance.OnSelect;
         }
 
-        public void RemoveCallbacks(IBoatActions instance)
+        public void RemoveCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_BoatActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IBoatActions instance)
+        public void SetCallbacks(IPlayerActions instance)
         {
-            foreach (var item in m_Wrapper.m_BoatActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_BoatActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public BoatActions @Boat => new BoatActions(this);
+    public PlayerActions @Player => new PlayerActions(this);
 
     // Menu
     private readonly InputActionMap m_Menu;
@@ -572,15 +503,13 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         }
     }
     public MenuActions @Menu => new MenuActions(this);
-    public interface IBoatActions
+    public interface IPlayerActions
     {
-        void OnPaddleLeft(InputAction.CallbackContext context);
-        void OnPaddleRight(InputAction.CallbackContext context);
-        void OnStaticRotateLeft(InputAction.CallbackContext context);
-        void OnStaticRotateRight(InputAction.CallbackContext context);
+        void OnMoveNorth(InputAction.CallbackContext context);
+        void OnMoveSouth(InputAction.CallbackContext context);
+        void OnMoveEast(InputAction.CallbackContext context);
+        void OnMoveWest(InputAction.CallbackContext context);
         void OnShowPauseMenus(InputAction.CallbackContext context);
-        void OnClosePauseMenu(InputAction.CallbackContext context);
-        void OnSelect(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

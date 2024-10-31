@@ -33,6 +33,7 @@ Transform:
   m_Children:
   - {fileID: 1254285857113112123}
   - {fileID: 1435817396580846061}
+  - {fileID: 7709171798709449037}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &777076905403582015
@@ -50,6 +51,7 @@ MonoBehaviour:
   <Walking>k__BackingField: 0
   <CurrentCube>k__BackingField: {fileID: 0}
   <ClickedCube>k__BackingField: {fileID: 0}
+  <Cursor>k__BackingField: {fileID: 2212164378622008069}
   <Indicator>k__BackingField: {fileID: 0}
   <FinalPath>k__BackingField: []
 --- !u!114 &3587905957626711346
@@ -149,6 +151,112 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2212164378622008069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7709171798709449037}
+  - component: {fileID: 7585062583648547237}
+  - component: {fileID: 637268348173570848}
+  - component: {fileID: 6537857363374671625}
+  m_Layer: 7
+  m_Name: Cursor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7709171798709449037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212164378622008069}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 748256452923678060}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7585062583648547237
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212164378622008069}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &637268348173570848
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212164378622008069}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 3cb31af2c7b1cf847902bb55d6ce4922, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6537857363374671625
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212164378622008069}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &2363011472454164585
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,10 +305,10 @@ MonoBehaviour:
   DeadzoneJoystick: 0.3
   DeadzoneJoystickTrigger: 0.3
   <Inputs>k__BackingField:
-    PaddleLeft: 0
-    PaddleRight: 0
-    RotateLeft: 0
-    RotateRight: 0
+    MoveNorth: 0
+    MoveSouth: 0
+    MoveEast: 0
+    MoveWest: 0
     Deadzone: 0
 --- !u!114 &3769721946852234292
 MonoBehaviour:
@@ -214,7 +322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f027e8aeea2b0e4daeb06e3d2d5d532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterMultiplayerManager: {fileID: 3587905957626711346}
-  <PlayerController>k__BackingField: {fileID: 0}
-  <InputManagementProperty>k__BackingField: {fileID: 0}
+  <PlayerController>k__BackingField: {fileID: 777076905403582015}
+  <InputManagementProperty>k__BackingField: {fileID: 4476048959097918299}
   <CharacterAnimatorProperty>k__BackingField: {fileID: 0}

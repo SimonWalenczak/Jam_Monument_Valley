@@ -39,19 +39,17 @@ namespace Character
         {
             InputsEnum inputsEnum = Inputs;
 
-            //Paddle
-            if (context.action.name == _gameplayInputs.Boat.PaddleLeft.name)
-                inputsEnum.PaddleLeft = context.ReadValue<float>() > DeadzoneJoystickTrigger;
+            if (context.action.name == _gameplayInputs.Player.MoveNorth.name)
+                inputsEnum.MoveNorth = context.ReadValue<float>() > DeadzoneJoystickTrigger;
 
-            if (context.action.name == _gameplayInputs.Boat.PaddleRight.name)
-                inputsEnum.PaddleRight = context.ReadValue<float>() > DeadzoneJoystickTrigger;
+            if (context.action.name == _gameplayInputs.Player.MoveSouth.name)
+                inputsEnum.MoveSouth = context.ReadValue<float>() > DeadzoneJoystickTrigger;
+            
+            if (context.action.name == _gameplayInputs.Player.MoveEast.name)
+                inputsEnum.MoveEast = context.ReadValue<float>() > DeadzoneJoystickTrigger;
 
-            //Rotate
-            if (context.action.name == _gameplayInputs.Boat.StaticRotateLeft.name)
-                inputsEnum.RotateLeft = context.ReadValue<float>();
-
-            if (context.action.name == _gameplayInputs.Boat.StaticRotateRight.name)
-                inputsEnum.RotateRight = context.ReadValue<float>();
+            if (context.action.name == _gameplayInputs.Player.MoveWest.name)
+                inputsEnum.MoveWest = context.ReadValue<float>() > DeadzoneJoystickTrigger;
 
             inputsEnum.Deadzone = DeadzoneJoystick;
 
@@ -62,12 +60,11 @@ namespace Character
     [Serializable]
     public struct InputsEnum
     {
-        public bool PaddleLeft;
-        public bool PaddleRight;
-
-        public float RotateLeft;
-        public float RotateRight;
-
+        public bool MoveNorth;
+        public bool MoveSouth;
+        public bool MoveEast;
+        public bool MoveWest;
+        
         public float Deadzone;
     }
 }

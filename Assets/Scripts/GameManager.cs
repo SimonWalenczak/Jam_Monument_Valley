@@ -1,8 +1,8 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    [field: SerializeField] public PlayerController Player { get; private set; }
+    // [field: SerializeField] public PlayerController Player { get; private set; }
     [field: SerializeField] public List<PathCondition> PathConditions = new List<PathCondition>();
     [field: SerializeField] public List<Transform> Pivots;
 
@@ -20,7 +20,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogError("There is another Game Manager in this scene !");
+        }
     }
 
     void Update()
@@ -28,9 +35,9 @@ public class GameManager : MonoBehaviour
         foreach (PathCondition pc in PathConditions)
         {
             int count = 0;
-            for (int i = 0; i < pc.conditions.Count; i++)
+            foreach (var condition in pc.conditions)
             {
-                if (pc.conditions[i].conditionObject.eulerAngles == pc.conditions[i].eulerAngle)
+                if (condition.conditionObject.eulerAngles == condition.eulerAngle)
                 {
                     count++;
                 }
@@ -40,8 +47,8 @@ public class GameManager : MonoBehaviour
                 sp.block.PossiblePaths[sp.index].active = (count == pc.conditions.Count);
         }
 
-        if (Player.Walking)
-            return;
+        // if (Player.Walking)
+        //     return;
 
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -68,7 +75,7 @@ public class GameManager : MonoBehaviour
     }
 }
 
-[System.Serializable]
+[Serializable]
 public class PathCondition
 {
     public string pathConditionName;
@@ -76,14 +83,14 @@ public class PathCondition
     public List<SinglePath> paths;
 }
 
-[System.Serializable]
+[Serializable]
 public class Condition
 {
     public Transform conditionObject;
     public Vector3 eulerAngle;
 }
 
-[System.Serializable]
+[Serializable]
 public class SinglePath
 {
     public BlockController block;
