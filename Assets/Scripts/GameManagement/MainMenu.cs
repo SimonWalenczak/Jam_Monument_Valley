@@ -4,12 +4,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject TransitionObject;
+    #region Properties
 
-    public void ValidPreset(int index)
+    [SerializeField] private GameObject _transitionObject;
+
+    #endregion
+
+    #region Methods
+
+    public void ValidPreset()
     {
-        GameData.NumberOfPlayer = index;
-        Debug.Log("Number of players : " + index);
         StartCoroutine(Transition("Lobby"));
     }
 
@@ -35,8 +39,10 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator Transition(string SceneName)
     {
-        TransitionObject.GetComponent<Animator>().SetBool("isActive",true);
+        _transitionObject.GetComponent<Animator>().SetBool("isActive", true);
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene(SceneName);
     }
+
+    #endregion
 }

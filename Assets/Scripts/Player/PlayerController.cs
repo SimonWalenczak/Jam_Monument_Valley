@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Character;
 using UnityEngine;
 using DG.Tweening;
 
@@ -17,16 +16,15 @@ public class PlayerController : MonoBehaviour
     [field: Space, SerializeField] public List<Transform> FinalPath { get; private set; }
 
     private BlockController _selectedBlock;
-
-    [SerializeField] private Animator _animator;
-
-    public Action<int> OnMoveCursor;
-    public Action OnSelectBlock;
+    private Animator _animator;
 
     private bool _isStarted;
     private bool _isMovingCursor;
     private bool _isDefineTargetBlock;
-    [SerializeField] private bool _isWalking;
+    private bool _isWalking;
+
+    public Action<int> OnMoveCursor;
+    public Action OnSelectBlock;
 
     #endregion
 
@@ -85,10 +83,10 @@ public class PlayerController : MonoBehaviour
         _isMovingCursor = true;
         StartCoroutine(ResetCursorTimer());
 
-        if (_selectedBlock.PossiblePaths[index].target != null)
+        if (_selectedBlock.PossiblePaths[index].Target != null)
         {
-            _selectedBlock = _selectedBlock.PossiblePaths[index].target.GetComponent<BlockController>();
-            Cursor.transform.position = new Vector3(_selectedBlock.transform.position.x, _selectedBlock.transform.position.y + _selectedBlock.walkPointOffset,
+            _selectedBlock = _selectedBlock.PossiblePaths[index].Target.GetComponent<BlockController>();
+            Cursor.transform.position = new Vector3(_selectedBlock.transform.position.x, _selectedBlock.transform.position.y + _selectedBlock.WalkPointOffset,
                 _selectedBlock.transform.position.z);
         }
         else
@@ -112,12 +110,12 @@ public class PlayerController : MonoBehaviour
 
         foreach (WalkPath path in CurrentCube.GetComponent<BlockController>().PossiblePaths)
         {
-            if (path.target != null)
+            if (path.Target != null)
             {
-                if (path.active)
+                if (path.Active)
                 {
-                    nextCubes.Add(path.target);
-                    path.target.GetComponent<BlockController>().PreviousBlock = CurrentCube;
+                    nextCubes.Add(path.Target);
+                    path.Target.GetComponent<BlockController>().PreviousBlock = CurrentCube;
                 }
             }
         }
@@ -140,12 +138,12 @@ public class PlayerController : MonoBehaviour
 
         foreach (WalkPath path in current.GetComponent<BlockController>().PossiblePaths)
         {
-            if (path.target != null)
+            if (path.Target != null)
             {
-                if (!visitedCubes.Contains(path.target) && path.active)
+                if (!visitedCubes.Contains(path.Target) && path.Active)
                 {
-                    nextCubes.Add(path.target);
-                    path.target.GetComponent<BlockController>().PreviousBlock = current;
+                    nextCubes.Add(path.Target);
+                    path.Target.GetComponent<BlockController>().PreviousBlock = current;
                 }
             }
         }

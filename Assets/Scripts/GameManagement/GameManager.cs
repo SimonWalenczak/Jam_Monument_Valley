@@ -10,12 +10,13 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
 
-    [field: SerializeField] public List<PathCondition> PathConditions = new List<PathCondition>();
-    [field: SerializeField] public List<Transform> Pivots;
-
-    [field: SerializeField] public Transform[] ObjectsToHide;
+    [field: SerializeField] public List<PathCondition> PathConditions { get; private set; } = new List<PathCondition>();
+    [field: SerializeField] public List<Transform> Pivots { get; private set; }
+    [field: SerializeField] public Transform[] ObjectsToHide { get; private set; }
 
     #endregion
+
+    #region Methods
 
     private void Awake()
     {
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
             }
 
             foreach (SinglePath sp in pc.paths)
-                sp.block.PossiblePaths[sp.index].active = (count == pc.conditions.Count);
+                sp.block.PossiblePaths[sp.index].Active = (count == pc.conditions.Count);
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
@@ -69,6 +70,8 @@ public class GameManager : MonoBehaviour
         Pivots[1].DOComplete();
         Pivots[1].DORotate(new Vector3(0, 0, 90), .6f).SetEase(Ease.OutBack);
     }
+
+    #endregion
 }
 
 [Serializable]

@@ -1,24 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerConfigurationManager : MonoBehaviour
 {
-    [HideInInspector] public List<PlayerConfiguration> playerConfigs;
-
-    [SerializeField] private int MaxPlayer = 2;
-
-    [SerializeField] private bool SelecteionFinish;
-    [SerializeField] private TextMeshProUGUI TextExplain;
-    [SerializeField] private GameObject ExplainPanel;
+    #region Properties
 
     public static PlayerConfigurationManager Instance { get; private set; }
-    
-    public List<GameObject> AllMeshPlayersAtTheEnd;
+
+    [SerializeField] private int _maxPlayer = 2;
+    [SerializeField] private bool _selecteionFinish;
+    [SerializeField] private TextMeshProUGUI _textExplain;
+    [SerializeField] private GameObject _explainPanel;
+
+    private List<PlayerConfiguration> _playerConfigs;
+
+    #endregion
+
+    #region Methods
 
     private void Awake()
     {
@@ -30,46 +33,44 @@ public class PlayerConfigurationManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(Instance);
-            playerConfigs = new List<PlayerConfiguration>();
+            _playerConfigs = new List<PlayerConfiguration>();
         }
-
-        MaxPlayer = GameData.NumberOfPlayer;
     }
 
     private void Update()
     {
-        if (SelecteionFinish == false)
+        if (_selecteionFinish == false)
         {
-            if (playerConfigs.Count >= MaxPlayer)
+            if (_playerConfigs.Count >= _maxPlayer)
             {
-                ExplainPanel.SetActive(false);
+                _explainPanel.SetActive(false);
                 GetComponent<PlayerInputManager>().playerPrefab = null;
-                SelecteionFinish = true;
+                _selecteionFinish = true;
             }
             else
             {
-                TextExplain.SetText((GameData.NumberOfPlayer - playerConfigs.Count).ToString() +
-                                    " controllers left to connect.");
+                _textExplain.SetText((_maxPlayer - _playerConfigs.Count).ToString() +
+                                     " controllers left to connect.");
             }
         }
     }
 
     public List<PlayerConfiguration> GetPlayerConfigs()
     {
-        return playerConfigs;
+        return _playerConfigs;
     }
 
     public void SetPlayerMesh(int index, GameObject mesh, int intMesh)
     {
-        playerConfigs[index].MeshPlayer = mesh;
-        playerConfigs[index].MeshIndex = intMesh;
-        playerConfigs[index].NumPlayer = playerConfigs[index].PlayerIndex;
+        _playerConfigs[index].MeshPlayer = mesh;
+        _playerConfigs[index].MeshIndex = intMesh;
+        _playerConfigs[index].NumPlayer = _playerConfigs[index].PlayerIndex;
     }
 
     public void ReadyPlayer(int index)
     {
-        playerConfigs[index].IsReady = true;
-        if (playerConfigs.Count == MaxPlayer && playerConfigs.All(p => p.IsReady == true))
+        _playerConfigs[index].IsReady = true;
+        if (_playerConfigs.Count == _maxPlayer && _playerConfigs.All(p => p.IsReady == true))
         {
             StartCoroutine(Transition());
         }
@@ -77,14 +78,14 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     public void HandlePlayerJoin(PlayerInput pi)
     {
-        if (playerConfigs.Count < MaxPlayer)
+        if (_playerConfigs.Count < _maxPlayer)
         {
             Debug.Log("Player Joined " + pi.playerIndex);
 
-            if (playerConfigs.All(p => p.PlayerIndex != pi.playerIndex))
+            if (_playerConfigs.All(p => p.PlayerIndex != pi.playerIndex))
             {
                 pi.transform.SetParent(transform);
-                playerConfigs.Add(new PlayerConfiguration(pi));
+                _playerConfigs.Add(new PlayerConfiguration(pi));
             }
         }
         else
@@ -98,6 +99,8 @@ public class PlayerConfigurationManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("MainScene");
     }
+
+    #endregion
 }
 
 public class PlayerConfiguration

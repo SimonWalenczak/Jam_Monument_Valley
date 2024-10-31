@@ -13,8 +13,8 @@ public class BlockController : MonoBehaviour
     [field: SerializeField] public bool IsButton { get; private set; }
     [field: SerializeField] public bool DontRotate { get; private set; }
 
-    [field: Space, Header("Offsets"), SerializeField] public float walkPointOffset { get; private set; }
-    [field: SerializeField] public float stairOffset { get; private set; }
+    [field: Space, Header("Offsets"), SerializeField] public float WalkPointOffset { get; private set; }
+    [field: SerializeField] public float StairOffset { get; private set; }
   
     #endregion
 
@@ -22,8 +22,8 @@ public class BlockController : MonoBehaviour
 
     public Vector3 GetWalkPoint()
     {
-        float stair = IsStair ? stairOffset : 0;
-        return transform.position + transform.up * walkPointOffset - transform.up * stair;
+        float stair = IsStair ? StairOffset : 0;
+        return transform.position + transform.up * WalkPointOffset - transform.up * stair;
     }
 
     private void OnDrawGizmos()
@@ -37,10 +37,10 @@ public class BlockController : MonoBehaviour
 
         foreach (WalkPath p in PossiblePaths)
         {
-            if (p.target == null)
+            if (p.Target == null)
                 return;
-            Gizmos.color = p.active ? Color.black : Color.clear;
-            Gizmos.DrawLine(GetWalkPoint(), p.target.GetComponent<BlockController>().GetWalkPoint());
+            Gizmos.color = p.Active ? Color.black : Color.clear;
+            Gizmos.DrawLine(GetWalkPoint(), p.Target.GetComponent<BlockController>().GetWalkPoint());
         }
     }
 
@@ -50,12 +50,12 @@ public class BlockController : MonoBehaviour
 [Serializable]
 public class WalkPath
 {
-    public Transform target;
-    public bool active = true;
+    public Transform Target;
+    public bool Active;
 
     public WalkPath(Transform targetPos, bool active)
     {
-        this.target = targetPos.transform;
-        this.active = true;
+        Target = targetPos.transform;
+        Active = true;
     }
 }

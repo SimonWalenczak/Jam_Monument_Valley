@@ -531,7 +531,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1219873462}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: ValidPreset
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -569,7 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70cbd77d5225a444a8ff3ae37838e16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransitionObject: {fileID: 557082113}
+  _transitionObject: {fileID: 557082113}
 --- !u!4 &1219873463
 Transform:
   m_ObjectHideFlags: 0

@@ -68,8 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d563e886945fdc48a90633f2bdda976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterManager: {fileID: 3769721946852234292}
-  InputManagement: {fileID: 4476048959097918299}
+  <CharacterManager>k__BackingField: {fileID: 3769721946852234292}
+  <InputManagement>k__BackingField: {fileID: 4476048959097918299}
 --- !u!1 &1548447314366237918
 GameObject:
   m_ObjectHideFlags: 0

@@ -326,12 +326,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd5737809b50b843914e4c2764a29e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterImage: {fileID: 118233421716969405}
-  characterSprites:
+  <CharacterImage>k__BackingField: {fileID: 118233421716969405}
+  <CharacterSprites>k__BackingField:
   - {fileID: 21300000, guid: 05a6d92e69c355941a62f8fe36abd0b0, type: 3}
   - {fileID: 21300000, guid: 8978c474bb31ec049a84cf7d1bd39210, type: 3}
   selectedCharacterIndex: 0
-  IsSelected: 0
   _titlePlayer: {fileID: 5565638541491004497}
   _titlePlayerSprites:
   - {fileID: 21300000, guid: c7f4263ee4dba9541a5fa4c23d0bfb5b, type: 3}

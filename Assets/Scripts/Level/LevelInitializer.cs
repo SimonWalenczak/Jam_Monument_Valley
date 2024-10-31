@@ -1,10 +1,15 @@
 using UnityEngine;
-using Character;
 
 public class InitializeLevel : MonoBehaviour
 {
+    #region Properties
+
     [SerializeField] private Transform[] _playerSpawn;
     [SerializeField] private CharacterMultiplayerManager _playerPrefab;
+
+    #endregion
+
+    #region Mathods
 
     private void Start()
     {
@@ -16,9 +21,11 @@ public class InitializeLevel : MonoBehaviour
             player.GetComponentInChildren<InputManagement>().InitializePlayer(playerConfigs[i]);
 
             Transform placeForCharacterPlayer = player.transform;
-            
+
             GameObject characterPlayer = Instantiate(playerConfigs[i].MeshPlayer, placeForCharacterPlayer.position, Quaternion.identity,
                 placeForCharacterPlayer.transform);
         }
     }
+
+    #endregion
 }

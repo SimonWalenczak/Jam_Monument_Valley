@@ -1,10 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+
 public class SpawnPlayerSetupMenu : MonoBehaviour
 {
-    public GameObject PlayerSetupMenuPrefab;
-    public PlayerInput input;
+    #region Properties
+
+    [field: SerializeField] public GameObject PlayerSetupMenuPrefab { get; private set; }
+    [field: SerializeField] public PlayerInput input { get; private set; }
+
+    #endregion
+
+    #region Methods
 
     private void Awake()
     {
@@ -13,8 +20,10 @@ public class SpawnPlayerSetupMenu : MonoBehaviour
         {
             var menu = Instantiate(PlayerSetupMenuPrefab, rootMenu.transform);
             input.uiInputModule = menu.GetComponentInChildren<InputSystemUIInputModule>();
-            
+
             menu.GetComponent<SelectCharacter>().SetPlayerIndex(input.playerIndex);
         }
     }
+
+    #endregion
 }
