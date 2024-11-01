@@ -454,17 +454,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press ' Start ' or ' J ' to connect your controllers.
+  m_text: Press "Start" or "J" to connect your controllers
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b87edb5b3c59161409d5a88b9e2486d5, type: 2}
-  m_sharedMaterial: {fileID: 8179934489856887647, guid: b87edb5b3c59161409d5a88b9e2486d5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9302e9dcce5f4dc4bacc19092e708395, type: 2}
+  m_sharedMaterial: {fileID: 8132067489057420623, guid: 9302e9dcce5f4dc4bacc19092e708395, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4281677109
+  m_fontColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1059,15 +1059,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: X controllers left to connect
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b87edb5b3c59161409d5a88b9e2486d5, type: 2}
-  m_sharedMaterial: {fileID: 8179934489856887647, guid: b87edb5b3c59161409d5a88b9e2486d5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9302e9dcce5f4dc4bacc19092e708395, type: 2}
+  m_sharedMaterial: {fileID: 8132067489057420623, guid: 9302e9dcce5f4dc4bacc19092e708395, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4281677109
+  m_fontColor: {r: 0.20784314, g: 0.20784314, b: 0.20784314, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1084,8 +1084,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 68.56
-  m_fontSizeBase: 68.56
+  m_fontSize: 71.4
+  m_fontSizeBase: 71.4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
