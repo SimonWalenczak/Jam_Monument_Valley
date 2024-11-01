@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
@@ -11,6 +12,8 @@ public class PlayerConfigurationManager : MonoBehaviour
     #region Properties
 
     public static PlayerConfigurationManager Instance { get; private set; }
+
+    [SerializeField] private Fader _fader;
 
     [SerializeField] private int _maxPlayer = 2;
     [SerializeField] private bool _selecteionFinish;
@@ -50,7 +53,7 @@ public class PlayerConfigurationManager : MonoBehaviour
             else
             {
                 _textExplain.SetText((_maxPlayer - _playerConfigs.Count).ToString() +
-                                     " controllers left to connect.");
+                                     " controllers left to connect");
             }
         }
     }
@@ -96,8 +99,9 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     IEnumerator Transition()
     {
+        MusicPlayer.Instance.AudioSource.DOFade(0, 2);
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("MainScene");
+        _fader.FadeOut();
     }
 
     #endregion
