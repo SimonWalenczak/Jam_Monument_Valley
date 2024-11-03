@@ -99,7 +99,7 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     IEnumerator Transition()
     {
-        MusicPlayer.Instance.AudioSource.DOFade(0, 2);
+        MusicPlayer.Instance.AudioSource.DOFade(0, 3);
         yield return new WaitForSeconds(1);
         _fader.FadeOut();
     }
