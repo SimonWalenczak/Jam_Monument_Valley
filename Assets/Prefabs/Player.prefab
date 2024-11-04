@@ -54,6 +54,7 @@ MonoBehaviour:
   <Cursor>k__BackingField: {fileID: 7024901992989887627}
   <Indicator>k__BackingField: {fileID: 8843296161523147288}
   <FinalPath>k__BackingField: []
+  PlayerIndex: 0
 --- !u!114 &3587905957626711346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,8 +218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f027e8aeea2b0e4daeb06e3d2d5d532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <PlayerController>k__BackingField: {fileID: 777076905403582015}
   <InputManagementProperty>k__BackingField: {fileID: 4476048959097918299}
+  <PlayerControllerProperty>k__BackingField: {fileID: 777076905403582015}
+  <PivotProperty>k__BackingField: {fileID: 0}
 --- !u!1 &7024901992989887627
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class InputManagement : MonoBehaviour
 
     private CharacterMultiplayerManager _characterMultiplayerManager;
     private GameplayInputs _gameplayInputs;
-    private PlayerConfiguration _playerConfig;
+    [HideInInspector] public PlayerConfiguration PlayerConfig;
 
     #endregion
 
@@ -27,8 +27,8 @@ public class InputManagement : MonoBehaviour
 
     public void InitializePlayer(PlayerConfiguration pc)
     {
-        _playerConfig = pc;
-        _playerConfig.Input.onActionTriggered += GatherInputs;
+        PlayerConfig = pc;
+        PlayerConfig.Input.onActionTriggered += GatherInputs;
     }
 
     private void GatherInputs(InputAction.CallbackContext context)

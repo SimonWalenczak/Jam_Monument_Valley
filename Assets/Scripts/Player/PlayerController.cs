@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public Transform Indicator { get; private set; }
     [field: Space, SerializeField] public List<Transform> FinalPath { get; private set; }
 
+    public int PlayerIndex;
+    
     private BlockController _selectedBlock;
     private Animator _animator;
 

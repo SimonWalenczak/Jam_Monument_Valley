@@ -6,7 +6,7 @@ public class BlockController : MonoBehaviour
 {
     #region Properties
 
-    [field: SerializeField] public List<WalkPath> PossiblePaths { get; private set; }
+    [field: SerializeField] public List<WalkPath> PossiblePaths { get; set; }
     [field: Space, SerializeField] public Transform PreviousBlock { get; set; }
     [field: Header("Booleans"), SerializeField] public bool IsStair { get; private set; }
     [field: SerializeField] public bool MovingGround { get; private set; }
@@ -57,5 +57,29 @@ public class WalkPath
     {
         Target = targetPos.transform;
         Active = true;
+    }
+}
+
+[Serializable]
+public class ChangingBlock
+{
+	public BlockController Block;
+	public List<ChangingPath> ChangingPaths;
+
+    public ChangingBlock(BlockController block, List<ChangingPath> possiblePaths)
+    {
+        Block = block;
+        ChangingPaths = possiblePaths;
+    }
+}
+
+[Serializable]
+public class ChangingPath
+{
+    public List<WalkPath> PossiblePaths;
+
+    public ChangingPath(List<WalkPath> possiblePaths)
+    {
+        PossiblePaths = possiblePaths;
     }
 }
