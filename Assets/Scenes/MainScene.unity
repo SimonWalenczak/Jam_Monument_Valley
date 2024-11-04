@@ -561,13 +561,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PivotBlocks:
-  - {fileID: 968425916}
   - {fileID: 786137566}
   - {fileID: 1821756578}
   - {fileID: 1187123905}
   - {fileID: 196315359}
   - {fileID: 745397284}
-  - {fileID: 1008917502}
   PivotRotationIndex: 0
   ChangingBlocks:
   - Block: {fileID: 1865989082}
@@ -578,36 +576,188 @@ MonoBehaviour:
       - Target: {fileID: 755669588}
         Active: 1
       - Target: {fileID: 0}
-        Active: 0
+        Active: 1
       - Target: {fileID: 0}
-        Active: 0
+        Active: 1
     - PossiblePaths:
       - Target: {fileID: 0}
         Active: 1
       - Target: {fileID: 755669588}
         Active: 1
       - Target: {fileID: 0}
-        Active: 0
+        Active: 1
       - Target: {fileID: 0}
-        Active: 0
+        Active: 1
     - PossiblePaths:
       - Target: {fileID: 0}
         Active: 1
       - Target: {fileID: 755669588}
         Active: 1
       - Target: {fileID: 0}
-        Active: 0
+        Active: 1
       - Target: {fileID: 0}
-        Active: 0
+        Active: 1
     - PossiblePaths:
-      - Target: {fileID: 0}
+      - Target: {fileID: 1008917501}
         Active: 1
       - Target: {fileID: 755669588}
         Active: 1
       - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+  - Block: {fileID: 1834617420}
+    ChangingPaths:
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 1008917501}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 968425915}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
         Active: 0
       - Target: {fileID: 0}
         Active: 0
+      - Target: {fileID: 0}
+        Active: 0
+      - Target: {fileID: 0}
+        Active: 0
+  - Block: {fileID: 651985425}
+    ChangingPaths:
+    - PossiblePaths:
+      - Target: {fileID: 1152439251}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 1475648932}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 1152439251}
+        Active: 1
+      - Target: {fileID: 1008917501}
+        Active: 1
+      - Target: {fileID: 1475648932}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 1152439251}
+        Active: 1
+      - Target: {fileID: 968425915}
+        Active: 1
+      - Target: {fileID: 1475648932}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 1152439251}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 1475648932}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+  - Block: {fileID: 968425916}
+    ChangingPaths:
+    - PossiblePaths:
+      - Target: {fileID: 786137565}
+        Active: 1
+      - Target: {fileID: 1865989081}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 786137565}
+        Active: 1
+      - Target: {fileID: 1834617418}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 651985424}
+        Active: 1
+      - Target: {fileID: 786137565}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+  - Block: {fileID: 1008917502}
+    ChangingPaths:
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 745397283}
+        Active: 1
+      - Target: {fileID: 1834617418}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 651985424}
+        Active: 1
+      - Target: {fileID: 745397283}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 745397283}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 745397283}
+        Active: 1
+      - Target: {fileID: 1865989081}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
   _rotateTimer: 2
   CanRotate: 0
   IsRotating: 0
@@ -2249,6 +2399,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1812035674523693128, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
   m_PrefabInstance: {fileID: 651985423}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &651985425 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+  m_PrefabInstance: {fileID: 651985423}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae22940d599ab1744a9da5bbbca97350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &701176574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6361,6 +6522,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1812035674523693128, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
   m_PrefabInstance: {fileID: 1834617417}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1834617420 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+  m_PrefabInstance: {fileID: 1834617417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae22940d599ab1744a9da5bbbca97350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1865989080
 PrefabInstance:
   m_ObjectHideFlags: 0

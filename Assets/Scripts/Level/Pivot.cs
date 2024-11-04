@@ -69,14 +69,16 @@ namespace Level
             }
         }
 
+        //Pour les blocks connectés à un block de pivot ET pour les block extrémitées du pivot
         private void UpdateBlocksRotation()
         {
-            // foreach (var changingBlock in ChangingBlocks)
-            // {
-            //     changingBlock.Block.PossiblePaths = changingBlock.ChangingPaths[PivotRotationIndex].PossiblePaths;
-            // }
+            foreach (var changingBlock in ChangingBlocks)
+            {
+                changingBlock.Block.PossiblePaths = changingBlock.ChangingPaths[PivotRotationIndex].PossiblePaths;
+            }
         }
 
+        //Pour tous les blocks du pivot sauf les extrémitées
         private void UpdatePivotBlocksRotation()
         {
             foreach (var pivotBlock in PivotBlocks)
@@ -87,7 +89,7 @@ namespace Level
                 {
                     previousWalkPaths.Add(new WalkPath(path.Target, path.Active));
                 }
-
+            
                 if (valueRotation == 1)
                 {
                     pivotBlock.PossiblePaths[2].Target = previousWalkPaths[0].Target;
