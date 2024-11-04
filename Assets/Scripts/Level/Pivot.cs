@@ -14,8 +14,7 @@ namespace Level
 
         [SerializeField] private int PivotRotationIndex;
         [SerializeField] private List<ChangingBlock> ChangingBlocks;
-
-
+        
         [SerializeField] private int _rotateTimer;
 
         public Action<int> OnMovePivot;
@@ -27,6 +26,8 @@ namespace Level
         private int valueRotation;
 
         List<WalkPath> previousWalkPaths = new List<WalkPath>();
+
+        public PlayerController playerController;
 
         #endregion
 
@@ -44,18 +45,17 @@ namespace Level
 
         private void ChangePivotValue(int value)
         {
-            if (!CanRotate) return;
+            if (!CanRotate || playerController.IsWalking) return;
 
             CanRotate = false;
             IsRotating = true;
 
             valueRotation = value;
             PivotRotationIndex += value;
-
-            
             
             CheckPivotIndex();
             RotatePivot();
+            playerController.CheckCursorPosition();
         }
 
         private void CheckPivotIndex()
@@ -92,19 +92,20 @@ namespace Level
                     previousWalkPaths.Add(new WalkPath(path.Target, path.Active));
                 }
             
-                if (valueRotation == 1)
+                switch (valueRotation)
                 {
-                    pivotBlock.PossiblePaths[2].Target = previousWalkPaths[0].Target;
-                    pivotBlock.PossiblePaths[3].Target = previousWalkPaths[1].Target;
-                    pivotBlock.PossiblePaths[1].Target = previousWalkPaths[2].Target;
-                    pivotBlock.PossiblePaths[0].Target = previousWalkPaths[3].Target;
-                }
-                else if (valueRotation == -1)
-                {
-                    pivotBlock.PossiblePaths[0] = previousWalkPaths[2];
-                    pivotBlock.PossiblePaths[1] = previousWalkPaths[3];
-                    pivotBlock.PossiblePaths[2] = previousWalkPaths[1];
-                    pivotBlock.PossiblePaths[3] = previousWalkPaths[0];
+                    case 1:
+                        pivotBlock.PossiblePaths[2].Target = previousWalkPaths[0].Target;
+                        pivotBlock.PossiblePaths[3].Target = previousWalkPaths[1].Target;
+                        pivotBlock.PossiblePaths[1].Target = previousWalkPaths[2].Target;
+                        pivotBlock.PossiblePaths[0].Target = previousWalkPaths[3].Target;
+                        break;
+                    case -1:
+                        pivotBlock.PossiblePaths[0] = previousWalkPaths[2];
+                        pivotBlock.PossiblePaths[1] = previousWalkPaths[3];
+                        pivotBlock.PossiblePaths[2] = previousWalkPaths[1];
+                        pivotBlock.PossiblePaths[3] = previousWalkPaths[0];
+                        break;
                 }
             }
         }
@@ -123,7 +124,7 @@ namespace Level
             IsRotating = false;
             CanRotate = true;
         }
-
+        
         #endregion
     }
 }

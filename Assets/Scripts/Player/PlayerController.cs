@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [field: Space, SerializeField] public List<Transform> FinalPath { get; private set; }
 
     public int PlayerIndex;
-    
+
     private BlockController _selectedBlock;
     private Animator _animator;
 
@@ -53,13 +53,26 @@ public class PlayerController : MonoBehaviour
         CanWalk = true;
     }
 
+    public void CheckCursorPosition()
+    {
+        if ((_selectedBlock.MovingGround && CurrentCube.GetComponent<BlockController>().MovingGround == false) ||
+            (_selectedBlock.MovingGround == false && CurrentCube.GetComponent<BlockController>().MovingGround))
+        {
+            _selectedBlock = CurrentCube.GetComponent<BlockController>();
+            Cursor.transform.position = new Vector3(_selectedBlock.transform.position.x, _selectedBlock.transform.position.y + _selectedBlock.WalkPointOffset,
+                _selectedBlock.transform.position.z);
+        }
+    }
+
     private void Update()
     {
         RayCastDown();
 
         transform.parent = CurrentCube.GetComponent<BlockController>().MovingGround ? CurrentCube.parent : null;
         Cursor.transform.parent = CurrentCube.GetComponent<BlockController>().MovingGround ? CurrentCube.parent : null;
-        
+
+        Cursor.transform.parent = _selectedBlock.MovingGround ? _selectedBlock.transform : null;
+
         _animator.SetBool("IsWalking", IsWalking);
 
         _isDefineTargetBlock = _selectedBlock.gameObject == CurrentCube.gameObject;

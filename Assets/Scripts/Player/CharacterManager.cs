@@ -18,12 +18,12 @@ public class CharacterManager : MonoBehaviour
     private void Start()
     {
         PivotProperty = GameManager.Instance.Pivots[InputManagementProperty.PlayerConfig.NumPlayer].GetComponent<Pivot>();
+        PivotProperty.playerController = PlayerControllerProperty;
     }
 
     private void Update()
     {
         PlayerControllerProperty.CanMoveCursor = !PivotProperty.IsRotating;
-        //PivotProperty.CanRotate = !PlayerControllerProperty.IsWalking;
         
         HandleCursorMovement();
     }
