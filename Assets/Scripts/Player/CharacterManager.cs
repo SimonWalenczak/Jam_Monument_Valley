@@ -43,6 +43,14 @@ public class CharacterManager : MonoBehaviour
         {
             PlayerControllerProperty.OnMoveCursor.Invoke(3);
         }
+        else if (InputManagementProperty.Inputs.RotateLeft)
+        {
+            PivotProperty.OnMovePivot(-1);
+        }
+        else if (InputManagementProperty.Inputs.RotateRight)
+        {
+            PivotProperty.OnMovePivot(1);
+        }
 
         if (InputManagementProperty.Inputs.ClickBlock)
         {

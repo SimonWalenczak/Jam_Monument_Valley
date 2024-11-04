@@ -50,6 +50,13 @@ public class InputManagement : MonoBehaviour
         if (context.action.name == _gameplayInputs.Player.ClickBlock.name)
             inputsEnum.ClickBlock = context.ReadValue<float>() > deadzoneJoystickTrigger;
 
+        if (context.action.name == _gameplayInputs.Player.RotateLeft.name)
+            inputsEnum.RotateLeft = context.ReadValue<float>() > deadzoneJoystickTrigger;
+        
+        if (context.action.name == _gameplayInputs.Player.RotateRight.name)
+            inputsEnum.RotateRight = context.ReadValue<float>() > deadzoneJoystickTrigger;
+   
+        
         inputsEnum.Deadzone = deadzoneJoystick;
 
         Inputs = inputsEnum;
@@ -67,6 +74,9 @@ public struct InputsEnum
     public bool MoveWest;
 
     public bool ClickBlock;
+
+    public bool RotateLeft;
+    public bool RotateRight;
 
     public float Deadzone;
 }

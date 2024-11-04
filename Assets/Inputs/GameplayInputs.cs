@@ -73,6 +73,24 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""RotateLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""d02de542-c3d1-4d5a-9a8f-a328350bd3a3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.1)"",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RotateRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9e68b53-b187-4cd5-9403-8190cc2f7d1e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.1)"",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""ShowPauseMenus"",
                     ""type"": ""Button"",
                     ""id"": ""e412642b-f162-4c33-9f57-0efea12c64c4"",
@@ -214,6 +232,50 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
                     ""action"": ""ClickBlock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d186e48-5f64-4f5f-888b-7a9775e2bef8"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e0af09ee-aa82-44f3-bf18-815b1d559aed"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09be5c09-791a-428e-97b6-491efdf68daa"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""663e3d94-9697-486b-8076-7cd0c155983f"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -341,6 +403,8 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         m_Player_MoveEast = m_Player.FindAction("MoveEast", throwIfNotFound: true);
         m_Player_MoveWest = m_Player.FindAction("MoveWest", throwIfNotFound: true);
         m_Player_ClickBlock = m_Player.FindAction("ClickBlock", throwIfNotFound: true);
+        m_Player_RotateLeft = m_Player.FindAction("RotateLeft", throwIfNotFound: true);
+        m_Player_RotateRight = m_Player.FindAction("RotateRight", throwIfNotFound: true);
         m_Player_ShowPauseMenus = m_Player.FindAction("ShowPauseMenus", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
@@ -412,6 +476,8 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MoveEast;
     private readonly InputAction m_Player_MoveWest;
     private readonly InputAction m_Player_ClickBlock;
+    private readonly InputAction m_Player_RotateLeft;
+    private readonly InputAction m_Player_RotateRight;
     private readonly InputAction m_Player_ShowPauseMenus;
     public struct PlayerActions
     {
@@ -422,6 +488,8 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         public InputAction @MoveEast => m_Wrapper.m_Player_MoveEast;
         public InputAction @MoveWest => m_Wrapper.m_Player_MoveWest;
         public InputAction @ClickBlock => m_Wrapper.m_Player_ClickBlock;
+        public InputAction @RotateLeft => m_Wrapper.m_Player_RotateLeft;
+        public InputAction @RotateRight => m_Wrapper.m_Player_RotateRight;
         public InputAction @ShowPauseMenus => m_Wrapper.m_Player_ShowPauseMenus;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -447,6 +515,12 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
             @ClickBlock.started += instance.OnClickBlock;
             @ClickBlock.performed += instance.OnClickBlock;
             @ClickBlock.canceled += instance.OnClickBlock;
+            @RotateLeft.started += instance.OnRotateLeft;
+            @RotateLeft.performed += instance.OnRotateLeft;
+            @RotateLeft.canceled += instance.OnRotateLeft;
+            @RotateRight.started += instance.OnRotateRight;
+            @RotateRight.performed += instance.OnRotateRight;
+            @RotateRight.canceled += instance.OnRotateRight;
             @ShowPauseMenus.started += instance.OnShowPauseMenus;
             @ShowPauseMenus.performed += instance.OnShowPauseMenus;
             @ShowPauseMenus.canceled += instance.OnShowPauseMenus;
@@ -469,6 +543,12 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
             @ClickBlock.started -= instance.OnClickBlock;
             @ClickBlock.performed -= instance.OnClickBlock;
             @ClickBlock.canceled -= instance.OnClickBlock;
+            @RotateLeft.started -= instance.OnRotateLeft;
+            @RotateLeft.performed -= instance.OnRotateLeft;
+            @RotateLeft.canceled -= instance.OnRotateLeft;
+            @RotateRight.started -= instance.OnRotateRight;
+            @RotateRight.performed -= instance.OnRotateRight;
+            @RotateRight.canceled -= instance.OnRotateRight;
             @ShowPauseMenus.started -= instance.OnShowPauseMenus;
             @ShowPauseMenus.performed -= instance.OnShowPauseMenus;
             @ShowPauseMenus.canceled -= instance.OnShowPauseMenus;
@@ -550,6 +630,8 @@ public partial class @GameplayInputs: IInputActionCollection2, IDisposable
         void OnMoveEast(InputAction.CallbackContext context);
         void OnMoveWest(InputAction.CallbackContext context);
         void OnClickBlock(InputAction.CallbackContext context);
+        void OnRotateLeft(InputAction.CallbackContext context);
+        void OnRotateRight(InputAction.CallbackContext context);
         void OnShowPauseMenus(InputAction.CallbackContext context);
     }
     public interface IMenuActions

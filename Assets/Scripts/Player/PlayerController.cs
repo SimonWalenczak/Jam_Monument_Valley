@@ -23,7 +23,8 @@ public class PlayerController : MonoBehaviour
     private bool _isStarted;
     private bool _isMovingCursor;
     private bool _isDefineTargetBlock;
-    private bool _isWalking;
+    public bool IsWalking;
+    public bool CanWalk;
 
     public Action<int> OnMoveCursor;
     public Action OnSelectBlock;
@@ -46,6 +47,8 @@ public class PlayerController : MonoBehaviour
 
         Indicator.transform.parent = null;
         Cursor.transform.parent = null;
+
+        CanWalk = true;
     }
 
     private void Update()
@@ -53,15 +56,16 @@ public class PlayerController : MonoBehaviour
         RayCastDown();
 
         transform.parent = CurrentCube.GetComponent<BlockController>().MovingGround ? CurrentCube.parent : null;
-
-        _animator.SetBool("IsWalking", _isWalking);
+        Cursor.transform.parent = CurrentCube.GetComponent<BlockController>().MovingGround ? CurrentCube.parent : null;
+        
+        _animator.SetBool("IsWalking", IsWalking);
 
         _isDefineTargetBlock = _selectedBlock.gameObject == CurrentCube.gameObject;
     }
 
     private void SelectBlock()
     {
-        if (_isWalking || _isDefineTargetBlock) return;
+        if (IsWalking || _isDefineTargetBlock || CanWalk == false) return;
 
         _isDefineTargetBlock = true;
 
@@ -179,7 +183,7 @@ public class PlayerController : MonoBehaviour
     {
         Sequence s = DOTween.Sequence();
 
-        _isWalking = true;
+        IsWalking = true;
 
         for (int i = FinalPath.Count - 1; i > 0; i--)
         {
@@ -209,7 +213,7 @@ public class PlayerController : MonoBehaviour
         }
 
         FinalPath.Clear();
-        _isWalking = false;
+        IsWalking = false;
         _isDefineTargetBlock = false;
     }
 

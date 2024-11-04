@@ -51,6 +51,24 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "RotateLeft",
+                    "type": "Button",
+                    "id": "d02de542-c3d1-4d5a-9a8f-a328350bd3a3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.1)",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RotateRight",
+                    "type": "Button",
+                    "id": "d9e68b53-b187-4cd5-9403-8190cc2f7d1e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.1)",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "ShowPauseMenus",
                     "type": "Button",
                     "id": "e412642b-f162-4c33-9f57-0efea12c64c4",
@@ -190,6 +208,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "ClickBlock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1d186e48-5f64-4f5f-888b-7a9775e2bef8",
+                    "path": "<Keyboard>/q",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0af09ee-aa82-44f3-bf18-815b1d559aed",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09be5c09-791a-428e-97b6-491efdf68daa",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "663e3d94-9697-486b-8076-7cd0c155983f",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
