@@ -71,22 +71,21 @@ namespace Level
 
         private void UpdateBlocksRotation()
         {
-            foreach (var changingBlock in ChangingBlocks)
-            {
-                changingBlock.Block.PossiblePaths = changingBlock.ChangingPaths[PivotRotationIndex].PossiblePaths;
-            }
+            // foreach (var changingBlock in ChangingBlocks)
+            // {
+            //     changingBlock.Block.PossiblePaths = changingBlock.ChangingPaths[PivotRotationIndex].PossiblePaths;
+            // }
         }
 
         private void UpdatePivotBlocksRotation()
         {
             foreach (var pivotBlock in PivotBlocks)
             {
-                previousWalkPaths = pivotBlock.PossiblePaths;
-                
-                for (int i = 0; i < pivotBlock.PossiblePaths.Count; i++)
+               previousWalkPaths = new List<WalkPath>();
+               
+                foreach (var path  in pivotBlock.PossiblePaths)
                 {
-                    previousWalkPaths[i].Target = pivotBlock.PossiblePaths[i].Target;
-                    previousWalkPaths[i].Active = pivotBlock.PossiblePaths[i].Active;
+                    previousWalkPaths.Add(new WalkPath(path.Target, path.Active));
                 }
 
                 if (valueRotation == 1)

@@ -8,14 +8,19 @@ public class BlockController : MonoBehaviour
 
     [field: SerializeField] public List<WalkPath> PossiblePaths { get; set; }
     [field: Space, SerializeField] public Transform PreviousBlock { get; set; }
-    [field: Header("Booleans"), SerializeField] public bool IsStair { get; private set; }
+
+    [field: Header("Booleans"), SerializeField]
+    public bool IsStair { get; private set; }
+
     [field: SerializeField] public bool MovingGround { get; private set; }
     [field: SerializeField] public bool IsButton { get; private set; }
     [field: SerializeField] public bool DontRotate { get; private set; }
 
-    [field: Space, Header("Offsets"), SerializeField] public float WalkPointOffset { get; private set; }
+    [field: Space, Header("Offsets"), SerializeField]
+    public float WalkPointOffset { get; private set; }
+
     [field: SerializeField] public float StairOffset { get; private set; }
-  
+
     #endregion
 
     #region Methods
@@ -55,7 +60,8 @@ public class WalkPath
 
     public WalkPath(Transform targetPos, bool active)
     {
-        Target = targetPos.transform;
+        if (targetPos != null)
+            Target = targetPos.transform;
         Active = true;
     }
 }
@@ -63,8 +69,8 @@ public class WalkPath
 [Serializable]
 public class ChangingBlock
 {
-	public BlockController Block;
-	public List<ChangingPath> ChangingPaths;
+    public BlockController Block;
+    public List<ChangingPath> ChangingPaths;
 
     public ChangingBlock(BlockController block, List<ChangingPath> possiblePaths)
     {
