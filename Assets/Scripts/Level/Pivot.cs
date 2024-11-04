@@ -52,6 +52,8 @@ namespace Level
             valueRotation = value;
             PivotRotationIndex += value;
 
+            
+            
             CheckPivotIndex();
             RotatePivot();
         }

@@ -22,6 +22,9 @@ public class CharacterManager : MonoBehaviour
 
     private void Update()
     {
+        PlayerControllerProperty.CanMoveCursor = !PivotProperty.IsRotating;
+        //PivotProperty.CanRotate = !PlayerControllerProperty.IsWalking;
+        
         HandleCursorMovement();
     }
 

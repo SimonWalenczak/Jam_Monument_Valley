@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+using Level;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private bool _isMovingCursor;
     private bool _isDefineTargetBlock;
     public bool IsWalking;
+    public bool CanMoveCursor;
     public bool CanWalk;
 
     public Action<int> OnMoveCursor;
@@ -84,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
     private void MoveCursor(int index)
     {
-        if (_isMovingCursor) return;
+        if (_isMovingCursor || CanMoveCursor == false) return;
 
         _isMovingCursor = true;
         StartCoroutine(ResetCursorTimer());
