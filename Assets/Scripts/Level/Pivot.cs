@@ -44,7 +44,7 @@ namespace Level
 
         private void ChangePivotValue(int value)
         {
-            if (!CanRotate || playerController.IsWalking) return;
+            if (CanRotate == false || playerController.IsWalking || playerController.CurrentCube.GetComponent<BlockController>().MovingGround) return;
 
             CanRotate = false;
             IsRotating = true;
@@ -112,13 +112,13 @@ namespace Level
         public void UpdatePivotBlocksRotationAfterMoved()
         {
             HasMoved = true;
-            
+
             foreach (var changingBlock in ChangingBlocksAfterMoved)
             {
                 changingBlock.Block.PossiblePaths = changingBlock.ChangingPaths[_pivotRotationIndex].PossiblePaths;
             }
         }
-        
+
         private void RotatePivot()
         {
             transform.DORotate(new Vector3(0, 90 * _pivotRotationIndex, 0), _rotateTimer).SetEase(Ease.Linear);
@@ -128,10 +128,10 @@ namespace Level
         IEnumerator WaitingForRotateTimer()
         {
             yield return new WaitForSeconds(_rotateTimer);
+            UpdatePivotBlocksRotation();
             if (HasMoved == false)
             {
                 UpdateBlocksRotation();
-                UpdatePivotBlocksRotation();
             }
             else
             {

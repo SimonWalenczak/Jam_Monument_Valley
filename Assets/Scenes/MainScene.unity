@@ -566,7 +566,6 @@ MonoBehaviour:
   - {fileID: 1187123905}
   - {fileID: 196315359}
   - {fileID: 745397284}
-  PivotRotationIndex: 0
   ChangingBlocks:
   - Block: {fileID: 1865989082}
     ChangingPaths:
@@ -758,10 +757,203 @@ MonoBehaviour:
         Active: 1
       - Target: {fileID: 0}
         Active: 1
+  ChangingBlocksAfterMoved:
+  - Block: {fileID: 1900028644}
+    ChangingPaths:
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 36447617}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 36447617}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 36447617}
+        Active: 1
+      - Target: {fileID: 1008917501}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 36447617}
+        Active: 1
+      - Target: {fileID: 968425915}
+        Active: 1
+  - Block: {fileID: 402449931}
+    ChangingPaths:
+    - PossiblePaths:
+      - Target: {fileID: 1100937824}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 1100937824}
+        Active: 1
+      - Target: {fileID: 1008917501}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 1100937824}
+        Active: 1
+      - Target: {fileID: 968425915}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 1100937824}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+  - Block: {fileID: 453901540}
+    ChangingPaths:
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 1008917501}
+        Active: 1
+      - Target: {fileID: 229994939}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 968425915}
+        Active: 1
+      - Target: {fileID: 229994939}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 229994939}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 229994939}
+        Active: 1
+  - Block: {fileID: 1008917502}
+    ChangingPaths:
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 745397283}
+        Active: 1
+      - Target: {fileID: 453901539}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 402449930}
+        Active: 1
+      - Target: {fileID: 745397283}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 1900028643}
+        Active: 1
+      - Target: {fileID: 745397283}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 745397283}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+  - Block: {fileID: 968425916}
+    ChangingPaths:
+    - PossiblePaths:
+      - Target: {fileID: 786137565}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 786137565}
+        Active: 1
+      - Target: {fileID: 453901539}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 402449930}
+        Active: 1
+      - Target: {fileID: 786137565}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+    - PossiblePaths:
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 0}
+        Active: 1
+      - Target: {fileID: 786137565}
+        Active: 1
+  _pivotRotationIndex: 0
   _rotateTimer: 2
+  playerController: {fileID: 0}
   CanRotate: 0
   IsRotating: 0
-  playerController: {fileID: 0}
+  HasMoved: 0
 --- !u!1001 &124420732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -770,6 +962,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 831965388}
     m_Modifications:
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[0].Target
+      value: 
+      objectReference: {fileID: 2088335926}
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[1].Target
+      value: 
+      objectReference: {fileID: 1089870937}
     - target: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: m_Name
       value: Block (31)
@@ -1167,6 +1367,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 831965388}
     m_Modifications:
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[2].Target
+      value: 
+      objectReference: {fileID: 2007245332}
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[3].Target
+      value: 
+      objectReference: {fileID: 984792171}
     - target: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: m_Name
       value: Block (26)
@@ -1229,6 +1437,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 831965388}
     m_Modifications:
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[0].Target
+      value: 
+      objectReference: {fileID: 1321559219}
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[2].Target
+      value: 
+      objectReference: {fileID: 453901539}
     - target: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: m_Name
       value: Block (20)
@@ -1634,6 +1850,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 831965388}
     m_Modifications:
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[0].Target
+      value: 
+      objectReference: {fileID: 1100937824}
     - target: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: m_Name
       value: Block (22)
@@ -1688,6 +1908,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1812035674523693128, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
   m_PrefabInstance: {fileID: 402449929}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &402449931 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+  m_PrefabInstance: {fileID: 402449929}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae22940d599ab1744a9da5bbbca97350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &418812980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1787,6 +2018,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1812035674523693128, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
   m_PrefabInstance: {fileID: 453901538}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &453901540 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+  m_PrefabInstance: {fileID: 453901538}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae22940d599ab1744a9da5bbbca97350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &467129097
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,12 +2335,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PivotBlocks: []
-  PivotRotationIndex: 0
   ChangingBlocks: []
+  ChangingBlocksAfterMoved: []
+  _pivotRotationIndex: 0
   _rotateTimer: 2
+  playerController: {fileID: 0}
   CanRotate: 0
   IsRotating: 0
-  playerController: {fileID: 0}
+  HasMoved: 0
 --- !u!1001 &563325685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3638,6 +3882,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 831965388}
     m_Modifications:
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[2].Target
+      value: 
+      objectReference: {fileID: 229491164}
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[3].Target
+      value: 
+      objectReference: {fileID: 1763228248}
     - target: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: m_Name
       value: Block (27)
@@ -4153,6 +4405,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 831965388}
     m_Modifications:
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[0].Target
+      value: 
+      objectReference: {fileID: 124420733}
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[1].Target
+      value: 
+      objectReference: {fileID: 1321559219}
     - target: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: m_Name
       value: Block (32)
@@ -4301,6 +4561,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 831965388}
     m_Modifications:
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[1].Target
+      value: 
+      objectReference: {fileID: 402449930}
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[3].Target
+      value: 
+      objectReference: {fileID: 1531114675}
     - target: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: m_Name
       value: Block (21)
@@ -4698,6 +4966,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 831965388}
     m_Modifications:
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[0].Target
+      value: 
+      objectReference: {fileID: 1089870937}
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[1].Target
+      value: 
+      objectReference: {fileID: 229994939}
     - target: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: m_Name
       value: Block (33)
@@ -5214,6 +5490,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 831965388}
     m_Modifications:
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[2].Target
+      value: 
+      objectReference: {fileID: 1100937824}
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[3].Target
+      value: 
+      objectReference: {fileID: 2007245332}
     - target: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: m_Name
       value: Block (24)
@@ -5954,6 +6238,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 831965388}
     m_Modifications:
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[1].Target
+      value: 
+      objectReference: {fileID: 2088335926}
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[2].Target
+      value: 
+      objectReference: {fileID: 984792171}
     - target: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: m_Name
       value: Block (28)
@@ -6790,6 +7082,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1812035674523693128, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
   m_PrefabInstance: {fileID: 1900028642}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1900028644 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+  m_PrefabInstance: {fileID: 1900028642}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae22940d599ab1744a9da5bbbca97350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1948880101
 GameObject:
   m_ObjectHideFlags: 0
@@ -6832,6 +7135,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 831965388}
     m_Modifications:
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[2].Target
+      value: 
+      objectReference: {fileID: 1531114675}
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[3].Target
+      value: 
+      objectReference: {fileID: 229491164}
     - target: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: m_Name
       value: Block (25)
@@ -6894,6 +7205,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 831965388}
     m_Modifications:
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[0].Target
+      value: 
+      objectReference: {fileID: 1763228248}
+    - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      propertyPath: <PossiblePaths>k__BackingField.Array.data[1].Target
+      value: 
+      objectReference: {fileID: 124420733}
     - target: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: m_Name
       value: Block (30)
