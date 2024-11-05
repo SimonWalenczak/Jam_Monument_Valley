@@ -76,6 +76,14 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool("IsWalking", IsWalking);
 
         _isDefineTargetBlock = _selectedBlock.gameObject == CurrentCube.gameObject;
+
+        if (CurrentCube.GetComponent<BlockController>().IsButton)
+        {
+            if (CurrentCube.GetComponent<BlockButton>().IsActive == false)
+            {
+                CurrentCube.GetComponent<BlockButton>().Active();
+            }
+        }
     }
 
     private void SelectBlock()

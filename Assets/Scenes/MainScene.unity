@@ -761,6 +761,7 @@ MonoBehaviour:
   _rotateTimer: 2
   CanRotate: 0
   IsRotating: 0
+  playerController: {fileID: 0}
 --- !u!1001 &124420732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2097,6 +2098,7 @@ MonoBehaviour:
   _rotateTimer: 2
   CanRotate: 0
   IsRotating: 0
+  playerController: {fileID: 0}
 --- !u!1001 &563325685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3142,7 +3144,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: <IsButton>k__BackingField
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6192318925067904099, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
       propertyPath: <PossiblePaths>k__BackingField.Array.data[3].Target
@@ -3195,13 +3197,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 882355863}
   m_SourcePrefab: {fileID: 100100000, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
 --- !u!4 &882355861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1812035674523693128, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
   m_PrefabInstance: {fileID: 882355860}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &882355862 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
+  m_PrefabInstance: {fileID: 882355860}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &882355863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882355862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0704cb3b09eb7a84ca5d433ce119d70b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groupBlock: {fileID: 69520815}
+  _movePosition: {x: 6, y: 3.5, z: -1}
+  _moveDuration: 3
+  IsActive: 0
 --- !u!1 &908828628
 GameObject:
   m_ObjectHideFlags: 0

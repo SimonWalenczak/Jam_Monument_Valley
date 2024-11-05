@@ -11,23 +11,22 @@ namespace Level
         #region Properties
 
         [SerializeField] private List<BlockController> PivotBlocks;
-
-        [SerializeField] private int PivotRotationIndex;
-        [SerializeField] private List<ChangingBlock> ChangingBlocks;
-        
-        [SerializeField] private int _rotateTimer;
-
-        public Action<int> OnMovePivot;
-
-        public bool CanRotate;
-
-        public bool IsRotating;
-
-        private int valueRotation;
-
         List<WalkPath> previousWalkPaths = new List<WalkPath>();
 
-        public PlayerController playerController;
+        [SerializeField] private List<ChangingBlock> ChangingBlocks;
+        [SerializeField] private List<ChangingBlock> ChangingBlocksAfterMoved;
+
+        [SerializeField] private int _pivotRotationIndex;
+        [SerializeField] private int _rotateTimer;
+
+        private int _valueRotation;
+
+        [HideInInspector] public PlayerController playerController;
+        public bool CanRotate;
+        public bool IsRotating;
+        public bool HasMoved;
+
+        public Action<int> OnMovePivot;
 
         #endregion
 
@@ -50,9 +49,9 @@ namespace Level
             CanRotate = false;
             IsRotating = true;
 
-            valueRotation = value;
-            PivotRotationIndex += value;
-            
+            _valueRotation = value;
+            _pivotRotationIndex += value;
+
             CheckPivotIndex();
             RotatePivot();
             playerController.CheckCursorPosition();
@@ -60,14 +59,14 @@ namespace Level
 
         private void CheckPivotIndex()
         {
-            if (PivotRotationIndex > 3)
+            if (_pivotRotationIndex > 3)
             {
-                PivotRotationIndex = 0;
+                _pivotRotationIndex = 0;
             }
 
-            if (PivotRotationIndex < 0)
+            if (_pivotRotationIndex < 0)
             {
-                PivotRotationIndex = 3;
+                _pivotRotationIndex = 3;
             }
         }
 
@@ -76,7 +75,7 @@ namespace Level
         {
             foreach (var changingBlock in ChangingBlocks)
             {
-                changingBlock.Block.PossiblePaths = changingBlock.ChangingPaths[PivotRotationIndex].PossiblePaths;
+                changingBlock.Block.PossiblePaths = changingBlock.ChangingPaths[_pivotRotationIndex].PossiblePaths;
             }
         }
 
@@ -85,14 +84,14 @@ namespace Level
         {
             foreach (var pivotBlock in PivotBlocks)
             {
-               previousWalkPaths = new List<WalkPath>();
-               
-                foreach (var path  in pivotBlock.PossiblePaths)
+                previousWalkPaths = new List<WalkPath>();
+
+                foreach (var path in pivotBlock.PossiblePaths)
                 {
                     previousWalkPaths.Add(new WalkPath(path.Target, path.Active));
                 }
-            
-                switch (valueRotation)
+
+                switch (_valueRotation)
                 {
                     case 1:
                         pivotBlock.PossiblePaths[2].Target = previousWalkPaths[0].Target;
@@ -110,21 +109,39 @@ namespace Level
             }
         }
 
+        public void UpdatePivotBlocksRotationAfterMoved()
+        {
+            HasMoved = true;
+            
+            foreach (var changingBlock in ChangingBlocksAfterMoved)
+            {
+                changingBlock.Block.PossiblePaths = changingBlock.ChangingPaths[_pivotRotationIndex].PossiblePaths;
+            }
+        }
+        
         private void RotatePivot()
         {
-            transform.DORotate(new Vector3(0, 90 * PivotRotationIndex, 0), _rotateTimer).SetEase(Ease.Linear);
+            transform.DORotate(new Vector3(0, 90 * _pivotRotationIndex, 0), _rotateTimer).SetEase(Ease.Linear);
             StartCoroutine(WaitingForRotateTimer());
         }
 
         IEnumerator WaitingForRotateTimer()
         {
             yield return new WaitForSeconds(_rotateTimer);
-            UpdateBlocksRotation();
-            UpdatePivotBlocksRotation();
+            if (HasMoved == false)
+            {
+                UpdateBlocksRotation();
+                UpdatePivotBlocksRotation();
+            }
+            else
+            {
+                UpdatePivotBlocksRotationAfterMoved();
+            }
+
             IsRotating = false;
             CanRotate = true;
         }
-        
+
         #endregion
     }
 }
