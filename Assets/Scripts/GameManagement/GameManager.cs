@@ -1,97 +1,40 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using DG.Tweening;
 
-public class GameManager : MonoBehaviour
+namespace GameManagement
 {
-    #region Properties
-
-    public static GameManager Instance;
-
-    [field: SerializeField] public List<PathCondition> PathConditions { get; private set; } = new List<PathCondition>();
-    [field: SerializeField] public List<Transform> Pivots { get; private set; }
-    [field: SerializeField] public Transform[] ObjectsToHide { get; private set; }
-
-    #endregion
-
-    #region Methods
-
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Debug.LogError("There is another Game Manager in this scene !");
-        }
-    }
+        #region Properties
 
-    void Update()
-    {
-        foreach (PathCondition pc in PathConditions)
+        public static GameManager Instance;
+        [field: SerializeField] public List<Transform> Pivots { get; private set; }
+
+        #endregion
+
+        #region Methods
+
+        private void Awake()
         {
-            int count = 0;
-            foreach (var condition in pc.conditions)
+            if (Instance == null)
             {
-                if (condition.conditionObject.eulerAngles == condition.eulerAngle)
-                {
-                    count++;
-                }
+                Instance = this;
             }
-
-            foreach (SinglePath sp in pc.paths)
-                sp.block.PossiblePaths[sp.index].Active = (count == pc.conditions.Count);
+            else
+            {
+                Debug.LogError("There is another Game Manager in this scene !");
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
+        void Update()
         {
-            int multiplier = Input.GetKey(KeyCode.RightArrow) ? 1 : -1;
-            Pivots[0].DOComplete();
-            Pivots[0].DORotate(new Vector3(0, 90 * multiplier, 0), .6f, RotateMode.WorldAxisAdd).SetEase(Ease.OutBack);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+            }
         }
 
-        foreach (Transform t in ObjectsToHide)
-        {
-            t.gameObject.SetActive(Pivots[0].eulerAngles.y > 45 && Pivots[0].eulerAngles.y < 90 + 45);
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
-        }
+        #endregion
     }
-
-    public void RotateRightPivot()
-    {
-        Pivots[1].DOComplete();
-        Pivots[1].DORotate(new Vector3(0, 0, 90), .6f).SetEase(Ease.OutBack);
-    }
-
-    #endregion
-}
-
-[Serializable]
-public class PathCondition
-{
-    public string pathConditionName;
-    public List<Condition> conditions;
-    public List<SinglePath> paths;
-}
-
-[Serializable]
-public class Condition
-{
-    public Transform conditionObject;
-    public Vector3 eulerAngle;
-}
-
-[Serializable]
-public class SinglePath
-{
-    public BlockController block;
-    public int index;
 }

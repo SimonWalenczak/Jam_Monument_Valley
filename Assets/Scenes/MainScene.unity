@@ -819,7 +819,7 @@ MonoBehaviour:
     - PossiblePaths:
       - Target: {fileID: 1100937824}
         Active: 1
-      - Target: {fileID: 0}
+      - Target: {fileID: 968425915}
         Active: 1
       - Target: {fileID: 0}
         Active: 1
@@ -1026,7 +1026,7 @@ MonoBehaviour:
         Active: 1
   _pivotRotationIndex: 0
   _rotateTimer: 2
-  playerController: {fileID: 0}
+  PlayerManagerRef: {fileID: 0}
   CanRotate: 0
   IsRotating: 0
   HasMoved: 0
@@ -2627,7 +2627,7 @@ MonoBehaviour:
   ChangingBlocksAfterMoved: []
   _pivotRotationIndex: 0
   _rotateTimer: 2
-  playerController: {fileID: 0}
+  PlayerManagerRef: {fileID: 0}
   CanRotate: 0
   IsRotating: 0
   HasMoved: 0
@@ -6353,11 +6353,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f6d7f2cabd31c419003f51f3da0dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <PathConditions>k__BackingField: []
   <Pivots>k__BackingField:
   - {fileID: 69520816}
   - {fileID: 510315921}
-  <ObjectsToHide>k__BackingField: []
 --- !u!4 &1576149738
 Transform:
   m_ObjectHideFlags: 0

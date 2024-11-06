@@ -2,276 +2,248 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using DG.Tweening;
-using Level;
+using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace Player
 {
-    #region Properties
-
-    [field: Space, SerializeField] public Transform CurrentCube { get; private set; }
-    [field: SerializeField] public Transform ClickedCube { get; private set; }
-    [field: SerializeField] public GameObject Cursor { get; private set; }
-    [field: SerializeField] public Transform Indicator { get; private set; }
-    [field: Space, SerializeField] public List<Transform> FinalPath { get; private set; }
-
-    public int PlayerIndex;
-
-    private BlockController _selectedBlock;
-    private Animator _animator;
-
-    private bool _isStarted;
-    private bool _isMovingCursor;
-    private bool _isDefineTargetBlock;
-    public bool IsWalking;
-    public bool CanMoveCursor;
-    public bool CanWalk;
-
-    public Action<int> OnMoveCursor;
-    public Action OnSelectBlock;
-
-    #endregion
-
-    #region Methods
-
-    private void Awake()
+    public class PlayerController : MonoBehaviour
     {
-        OnSelectBlock += SelectBlock;
-        OnMoveCursor += MoveCursor;
-    }
+        #region Properties
 
-    private void Start()
-    {
-        _animator = GetComponentInChildren<Animator>();
+        // Player Manager Reference
+        [SerializeField] private PlayerManager _playerManager;
 
-        RayCastDown();
-
-        Indicator.transform.parent = null;
-        Cursor.transform.parent = null;
-
-        CanWalk = true;
-    }
-
-    public void ResetCursorPosition()
-    {
-        // if ((_selectedBlock.MovingGround && CurrentCube.GetComponent<BlockController>().MovingGround == false) ||
-        //     (_selectedBlock.MovingGround == false && CurrentCube.GetComponent<BlockController>().MovingGround))
-        // {
-        //     _selectedBlock = CurrentCube.GetComponent<BlockController>();
-        //     Cursor.transform.position = new Vector3(_selectedBlock.transform.position.x, _selectedBlock.transform.position.y + _selectedBlock.WalkPointOffset,
-        //         _selectedBlock.transform.position.z);
-        // }
-        
-        _selectedBlock = CurrentCube.GetComponent<BlockController>();
-        Cursor.transform.position = new Vector3(_selectedBlock.transform.position.x, _selectedBlock.transform.position.y + _selectedBlock.WalkPointOffset,
-                 _selectedBlock.transform.position.z);
-    }
-
-    private void Update()
-    {
-        RayCastDown();
-
-        transform.parent = CurrentCube.GetComponent<BlockController>().MovingGround ? CurrentCube.parent : null;
-        Cursor.transform.parent = CurrentCube.GetComponent<BlockController>().MovingGround ? CurrentCube.parent : null;
-
-        Cursor.transform.parent = _selectedBlock.MovingGround ? _selectedBlock.transform : null;
-
-        _animator.SetBool("IsWalking", IsWalking);
-
-        _isDefineTargetBlock = _selectedBlock.gameObject == CurrentCube.gameObject;
-
-        if (CurrentCube.GetComponent<BlockController>().IsButton)
+        public PlayerManager PlayerManagerRef
         {
-            if (CurrentCube.GetComponent<BlockButton>().IsActive == false)
+            get => _playerManager;
+            private set => _playerManager = value;
+        }
+
+        // Path to Move
+        [Space, Header("Path To Move")]
+        [SerializeField] private List<Transform> _finalPath;
+
+        public List<Transform> FinalPath
+        {
+            get => _finalPath;
+            private set => _finalPath = value;
+        }
+
+       // Action Events
+        public Action<int> OnMoveCursor;
+        public Action OnSelectBlock;
+
+        #endregion
+
+        #region Methods
+
+        private void Awake()
+        {
+            OnSelectBlock += SelectBlock;
+            OnMoveCursor += MoveCursor;
+        }
+
+        private void Start()
+        {
+            RayCastDown();
+        }
+
+        private void Update()
+        {
+            RayCastDown();
+
+            //Setting parent depends to ground nature
+            transform.parent.transform.parent = PlayerManagerRef.CurrentBlock.MovingGround ? PlayerManagerRef.CurrentBlock.transform.parent : null;
+        }
+
+        #region Cursor
+
+        private void SelectBlock()
+        {
+            if (PlayerManagerRef.IsWalking || PlayerManagerRef.IsDefineTargetBlock || PlayerManagerRef.CanWalk == false) return;
+
+            PlayerManagerRef.IsDefineTargetBlock = true;
+
+            PlayerManagerRef.ClickedCube = PlayerManagerRef.SelectedBlock;
+            DOTween.Kill(gameObject.transform);
+            FinalPath.Clear();
+            FindPath();
+
+            PlayerManagerRef.Indicator.position = PlayerManagerRef.SelectedBlock.GetWalkPoint();
+            Sequence s = DOTween.Sequence();
+            s.AppendCallback(() => PlayerManagerRef.Indicator.GetComponentInChildren<ParticleSystem>().Play());
+            s.Append(PlayerManagerRef.Indicator.GetComponent<Renderer>().material.DOColor(Color.white, .1f));
+            s.Append(PlayerManagerRef.Indicator.GetComponent<Renderer>().material.DOColor(Color.black, .3f).SetDelay(.2f));
+            s.Append(PlayerManagerRef.Indicator.GetComponent<Renderer>().material.DOColor(Color.clear, .3f));
+        }
+
+        private void MoveCursor(int index)
+        {
+            if (PlayerManagerRef.IsMovingCursor || PlayerManagerRef.CanMoveCursor == false) return;
+
+            PlayerManagerRef.IsMovingCursor = true;
+            StartCoroutine(ResetCursorTimer());
+
+            if (PlayerManagerRef.SelectedBlock.PossiblePaths[index].Target != null)
             {
-                CurrentCube.GetComponent<BlockButton>().Active();
+                PlayerManagerRef.SelectedBlock = PlayerManagerRef.SelectedBlock.PossiblePaths[index].Target.GetComponent<BlockController>();
+                PlayerManagerRef.Cursor.transform.position = new Vector3(PlayerManagerRef.SelectedBlock.transform.position.x,
+                    PlayerManagerRef.SelectedBlock.transform.position.y + PlayerManagerRef.SelectedBlock.WalkPointOffset,
+                    PlayerManagerRef.SelectedBlock.transform.position.z);
             }
-        }
-    }
-
-    private void SelectBlock()
-    {
-        if (IsWalking || _isDefineTargetBlock || CanWalk == false) return;
-
-        _isDefineTargetBlock = true;
-
-        ClickedCube = _selectedBlock.transform;
-        DOTween.Kill(gameObject.transform);
-        FinalPath.Clear();
-        FindPath();
-
-        Indicator.position = _selectedBlock.GetWalkPoint();
-        Sequence s = DOTween.Sequence();
-        s.AppendCallback(() => Indicator.GetComponentInChildren<ParticleSystem>().Play());
-        s.Append(Indicator.GetComponent<Renderer>().material.DOColor(Color.white, .1f));
-        s.Append(Indicator.GetComponent<Renderer>().material.DOColor(Color.black, .3f).SetDelay(.2f));
-        s.Append(Indicator.GetComponent<Renderer>().material.DOColor(Color.clear, .3f));
-    }
-
-    private void MoveCursor(int index)
-    {
-        if (_isMovingCursor || CanMoveCursor == false) return;
-
-        _isMovingCursor = true;
-        StartCoroutine(ResetCursorTimer());
-
-        if (_selectedBlock.PossiblePaths[index].Target != null)
-        {
-            _selectedBlock = _selectedBlock.PossiblePaths[index].Target.GetComponent<BlockController>();
-            Cursor.transform.position = new Vector3(_selectedBlock.transform.position.x, _selectedBlock.transform.position.y + _selectedBlock.WalkPointOffset,
-                _selectedBlock.transform.position.z);
-        }
-        else
-        {
-            Debug.Log("There is no Block Controller at this position");
-        }
-    }
-
-    IEnumerator ResetCursorTimer()
-    {
-        yield return new WaitForSeconds(0.2f);
-        _isMovingCursor = false;
-    }
-
-    #region PathFinding
-
-    private void FindPath()
-    {
-        List<Transform> nextCubes = new List<Transform>();
-        List<Transform> pastCubes = new List<Transform>();
-
-        foreach (WalkPath path in CurrentCube.GetComponent<BlockController>().PossiblePaths)
-        {
-            if (path.Target != null)
-            {
-                if (path.Active)
-                {
-                    nextCubes.Add(path.Target);
-                    path.Target.GetComponent<BlockController>().PreviousBlock = CurrentCube;
-                }
-            }
-        }
-
-        pastCubes.Add(CurrentCube);
-
-        ExploreCube(nextCubes, pastCubes);
-        BuildPath();
-    }
-
-    private void ExploreCube(List<Transform> nextCubes, List<Transform> visitedCubes)
-    {
-        Transform current = nextCubes.First();
-        nextCubes.Remove(current);
-
-        if (current == ClickedCube)
-        {
-            return;
-        }
-
-        foreach (WalkPath path in current.GetComponent<BlockController>().PossiblePaths)
-        {
-            if (path.Target != null)
-            {
-                if (!visitedCubes.Contains(path.Target) && path.Active)
-                {
-                    nextCubes.Add(path.Target);
-                    path.Target.GetComponent<BlockController>().PreviousBlock = current;
-                }
-            }
-        }
-
-        visitedCubes.Add(current);
-
-        if (nextCubes.Any())
-        {
-            ExploreCube(nextCubes, visitedCubes);
-        }
-    }
-
-    private void BuildPath()
-    {
-        Transform cube = ClickedCube;
-        while (cube != CurrentCube)
-        {
-            FinalPath.Add(cube);
-            if (cube.GetComponent<BlockController>().PreviousBlock != null)
-                cube = cube.GetComponent<BlockController>().PreviousBlock;
             else
-                return;
-        }
-
-        FinalPath.Insert(0, ClickedCube);
-
-        FollowPath();
-    }
-
-    private void FollowPath()
-    {
-        Sequence s = DOTween.Sequence();
-
-        IsWalking = true;
-
-        for (int i = FinalPath.Count - 1; i > 0; i--)
-        {
-            float time = FinalPath[i].GetComponent<BlockController>().IsStair ? 1.5f : 1;
-
-            s.Append(transform.DOMove(FinalPath[i].GetComponent<BlockController>().GetWalkPoint(), .2f * time).SetEase(Ease.Linear));
-
-            if (!FinalPath[i].GetComponent<BlockController>().DontRotate)
             {
-                s.Join(transform.DOLookAt(FinalPath[i].position, .1f, AxisConstraint.Y, Vector3.up));
+                Debug.Log("There is no Block Controller at this position");
             }
         }
 
-        if (ClickedCube.GetComponent<BlockController>().IsButton)
+        IEnumerator ResetCursorTimer()
         {
-            s.AppendCallback(() => GameManager.Instance.RotateRightPivot());
+            yield return new WaitForSeconds(0.1f);
+            PlayerManagerRef.IsMovingCursor = false;
         }
 
-        s.AppendCallback(() => Clear());
-    }
+        #endregion
 
-    private void Clear()
-    {
-        foreach (Transform t in FinalPath)
+        #region PathFinding
+
+        private void FindPath()
         {
-            t.GetComponent<BlockController>().PreviousBlock = null;
-        }
+            List<Transform> nextCubes = new List<Transform>();
+            List<Transform> pastCubes = new List<Transform>();
 
-        FinalPath.Clear();
-        IsWalking = false;
-        _isDefineTargetBlock = false;
-    }
-
-    #endregion
-
-    private void RayCastDown()
-    {
-        Ray playerRay = new Ray(transform.GetChild(0).position, -transform.up);
-        RaycastHit playerHit;
-
-        if (Physics.Raycast(playerRay, out playerHit))
-        {
-            if (playerHit.transform.GetComponent<BlockController>() != null)
+            foreach (WalkPath path in PlayerManagerRef.CurrentBlock.PossiblePaths)
             {
-                CurrentCube = playerHit.transform;
-
-                if (_isStarted == false)
+                if (path.Target != null)
                 {
-                    _selectedBlock = CurrentCube.GetComponent<BlockController>();
-                    _isStarted = true;
+                    if (path.Active)
+                    {
+                        nextCubes.Add(path.Target);
+                        path.Target.GetComponent<BlockController>().PreviousBlock = PlayerManagerRef.CurrentBlock.transform;
+                    }
+                }
+            }
+
+            pastCubes.Add(PlayerManagerRef.CurrentBlock.transform);
+
+            ExploreCube(nextCubes, pastCubes);
+            BuildPath();
+        }
+
+        private void ExploreCube(List<Transform> nextCubes, List<Transform> visitedCubes)
+        {
+            Transform current = nextCubes.First();
+            nextCubes.Remove(current);
+
+            if (current == PlayerManagerRef.ClickedCube.transform)
+            {
+                return;
+            }
+
+            foreach (WalkPath path in current.GetComponent<BlockController>().PossiblePaths)
+            {
+                if (path.Target != null)
+                {
+                    if (!visitedCubes.Contains(path.Target) && path.Active)
+                    {
+                        nextCubes.Add(path.Target);
+                        path.Target.GetComponent<BlockController>().PreviousBlock = current;
+                    }
+                }
+            }
+
+            visitedCubes.Add(current);
+
+            if (nextCubes.Any())
+            {
+                ExploreCube(nextCubes, visitedCubes);
+            }
+        }
+
+        private void BuildPath()
+        {
+            Transform cube = PlayerManagerRef.ClickedCube.transform;
+            while (cube != PlayerManagerRef.CurrentBlock.transform)
+            {
+                FinalPath.Add(cube);
+                if (cube.GetComponent<BlockController>().PreviousBlock != null)
+                    cube = cube.GetComponent<BlockController>().PreviousBlock;
+                else
+                    return;
+            }
+
+            FinalPath.Insert(0, PlayerManagerRef.ClickedCube.transform);
+
+            FollowPath();
+        }
+
+        private void FollowPath()
+        {
+            Sequence s = DOTween.Sequence();
+
+            PlayerManagerRef.IsWalking = true;
+
+            for (int i = FinalPath.Count - 1; i > 0; i--)
+            {
+                float time = FinalPath[i].GetComponent<BlockController>().IsStair ? 1.5f : 1;
+
+                s.Append(transform.parent.transform.DOMove(FinalPath[i].GetComponent<BlockController>().GetWalkPoint(), .2f * time).SetEase(Ease.Linear));
+
+                if (!FinalPath[i].GetComponent<BlockController>().DontRotate)
+                {
+                    s.Join(transform.parent.transform.DOLookAt(FinalPath[i].position, .1f, AxisConstraint.Y, Vector3.up));
+                }
+            }
+
+            s.AppendCallback(() => Clear());
+        }
+
+        private void Clear()
+        {
+            foreach (Transform t in FinalPath)
+            {
+                t.GetComponent<BlockController>().PreviousBlock = null;
+            }
+
+            FinalPath.Clear();
+            PlayerManagerRef.IsWalking = false;
+            PlayerManagerRef.IsDefineTargetBlock = false;
+        }
+
+        #endregion
+
+        #region GroundRayDetect
+
+        private void RayCastDown()
+        {
+            Ray playerRay = new Ray(transform.GetChild(0).position, -gameObject.transform.up);
+            RaycastHit playerHit;
+
+            if (Physics.Raycast(playerRay, out playerHit))
+            {
+                if (playerHit.transform.GetComponent<BlockController>() != null)
+                {
+                    PlayerManagerRef.CurrentBlock = playerHit.transform.GetComponent<BlockController>();
+
+                    if (PlayerManagerRef.IsStarted == false)
+                    {
+                        PlayerManagerRef.SelectedBlock = PlayerManagerRef.CurrentBlock;
+                        PlayerManagerRef.IsStarted = true;
+                    }
                 }
             }
         }
-    }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Ray ray = new Ray(transform.GetChild(0).position, -transform.up);
-        Gizmos.DrawRay(ray);
-    }
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.blue;
+            Ray ray = new Ray(transform.GetChild(0).position, -transform.up);
+            Gizmos.DrawRay(ray);
+        }
 
-    #endregion
+        #endregion
+
+        #endregion
+    }
 }

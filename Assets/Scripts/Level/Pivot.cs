@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Player;
 
 namespace Level
 {
@@ -21,7 +22,7 @@ namespace Level
 
         private int _valueRotation;
 
-        [HideInInspector] public PlayerController playerController;
+        [HideInInspector] public PlayerManager PlayerManagerRef;
         public bool CanRotate;
         public bool IsRotating;
         public bool HasMoved;
@@ -44,7 +45,7 @@ namespace Level
 
         private void ChangePivotValue(int value)
         {
-            if (CanRotate == false || playerController.IsWalking || playerController.CurrentCube.GetComponent<BlockController>().MovingGround) return;
+            if (CanRotate == false || PlayerManagerRef.IsWalking || PlayerManagerRef.CurrentBlock.MovingGround) return;
 
             CanRotate = false;
             IsRotating = true;
@@ -54,7 +55,7 @@ namespace Level
 
             CheckPivotIndex();
             RotatePivot();
-            playerController.ResetCursorPosition();
+            PlayerManagerRef.ResetCursorPosition();
         }
 
         private void CheckPivotIndex()
