@@ -53,15 +53,19 @@ public class PlayerController : MonoBehaviour
         CanWalk = true;
     }
 
-    public void CheckCursorPosition()
+    public void ResetCursorPosition()
     {
-        if ((_selectedBlock.MovingGround && CurrentCube.GetComponent<BlockController>().MovingGround == false) ||
-            (_selectedBlock.MovingGround == false && CurrentCube.GetComponent<BlockController>().MovingGround))
-        {
-            _selectedBlock = CurrentCube.GetComponent<BlockController>();
-            Cursor.transform.position = new Vector3(_selectedBlock.transform.position.x, _selectedBlock.transform.position.y + _selectedBlock.WalkPointOffset,
-                _selectedBlock.transform.position.z);
-        }
+        // if ((_selectedBlock.MovingGround && CurrentCube.GetComponent<BlockController>().MovingGround == false) ||
+        //     (_selectedBlock.MovingGround == false && CurrentCube.GetComponent<BlockController>().MovingGround))
+        // {
+        //     _selectedBlock = CurrentCube.GetComponent<BlockController>();
+        //     Cursor.transform.position = new Vector3(_selectedBlock.transform.position.x, _selectedBlock.transform.position.y + _selectedBlock.WalkPointOffset,
+        //         _selectedBlock.transform.position.z);
+        // }
+        
+        _selectedBlock = CurrentCube.GetComponent<BlockController>();
+        Cursor.transform.position = new Vector3(_selectedBlock.transform.position.x, _selectedBlock.transform.position.y + _selectedBlock.WalkPointOffset,
+                 _selectedBlock.transform.position.z);
     }
 
     private void Update()

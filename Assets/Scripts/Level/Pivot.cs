@@ -15,7 +15,7 @@ namespace Level
 
         [SerializeField] private List<ChangingBlock> ChangingBlocks;
         [SerializeField] private List<ChangingBlock> ChangingBlocksAfterMoved;
-
+        
         [SerializeField] private int _pivotRotationIndex;
         [SerializeField] private int _rotateTimer;
 
@@ -54,7 +54,7 @@ namespace Level
 
             CheckPivotIndex();
             RotatePivot();
-            playerController.CheckCursorPosition();
+            playerController.ResetCursorPosition();
         }
 
         private void CheckPivotIndex()
