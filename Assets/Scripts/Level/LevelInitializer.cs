@@ -1,32 +1,52 @@
 using Player;
 using UnityEngine;
 
-public class InitializeLevel : MonoBehaviour
+namespace Level
 {
-    #region Properties
-
-    [SerializeField] private Transform[] _playerSpawn;
-    [SerializeField] private CharacterMultiplayerManager _playerPrefab;
-
-    #endregion
-
-    #region Mathods
-
-    private void Start()
+    public class InitializeLevel : MonoBehaviour
     {
-        var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
-        for (int i = 0; i < playerConfigs.Length; i++)
+        #region Properties
+        
+        [SerializeField] private Transform[] _playerSpawn;
+        [SerializeField] private CharacterMultiplayerManager _playerPrefab;
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Initializes the level by instantiating players at the specified spawn points and assigning player configurations.
+        /// </summary>
+        private void Start()
         {
-            CharacterMultiplayerManager player = Instantiate(_playerPrefab, _playerSpawn[i].position, _playerSpawn[i].rotation,
-                gameObject.transform);
-            player.GetComponentInChildren<InputManagement>().InitializePlayer(playerConfigs[i]);
+            var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
 
-            Transform placeForCharacterPlayer = player.transform;
+            // Instantiate each player at the appropriate spawn point
+            for (int i = 0; i < playerConfigs.Length; i++)
+            {
+                // Instantiate the player object
+                CharacterMultiplayerManager player = Instantiate(
+                    _playerPrefab,
+                    _playerSpawn[i].position,
+                    _playerSpawn[i].rotation,
+                    gameObject.transform
+                );
 
-            GameObject characterPlayer = Instantiate(playerConfigs[i].MeshPlayer, placeForCharacterPlayer.position, Quaternion.identity,
-                placeForCharacterPlayer.transform);
+                // Initialize player input management with the player's configuration
+                player.GetComponentInChildren<InputManagement>().InitializePlayer(playerConfigs[i]);
+
+                Transform placeForCharacterPlayer = player.transform;
+
+                // Instantiate the player's character mesh based on their configuration
+                GameObject characterPlayer = Instantiate(
+                    playerConfigs[i].MeshPlayer,
+                    placeForCharacterPlayer.position,
+                    Quaternion.identity,
+                    placeForCharacterPlayer.transform
+                );
+            }
         }
-    }
 
-    #endregion
+        #endregion
+    }
 }
