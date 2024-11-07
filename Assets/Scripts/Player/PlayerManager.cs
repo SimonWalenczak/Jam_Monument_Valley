@@ -1,6 +1,6 @@
+using UnityEngine;
 using GameManagement;
 using Level;
-using UnityEngine;
 
 namespace Player
 {
@@ -145,10 +145,8 @@ namespace Player
         /// </summary>
         private void UpdateTargetBlockStatus()
         {
-            if (IsStarted)
-            {
-                IsDefineTargetBlock = SelectedBlock.gameObject == CurrentBlock.gameObject;
-            }
+            if (!IsStarted) return;
+            IsDefineTargetBlock = SelectedBlock.gameObject == CurrentBlock.gameObject;
         }
 
         /// <summary>

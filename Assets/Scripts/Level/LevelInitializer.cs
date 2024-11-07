@@ -1,3 +1,4 @@
+using GameManagement;
 using MultiplayerSystem;
 using Player;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Level
     public class InitializeLevel : MonoBehaviour
     {
         #region Properties
-        
+
         [SerializeField] private Transform[] _playerSpawn;
         [SerializeField] private CharacterMultiplayerManager _playerPrefab;
 
@@ -19,10 +20,15 @@ namespace Level
 
         #region Methods
 
+        private void Start()
+        {
+            InitializePlayers();
+        }
+
         /// <summary>
         /// Initializes the level by instantiating players at the specified spawn points and assigning player configurations.
         /// </summary>
-        private void Start()
+        private void InitializePlayers()
         {
             var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
 
@@ -49,7 +55,11 @@ namespace Level
                     Quaternion.identity,
                     placeForCharacterPlayer.transform
                 );
+                
+                GameManager.Instance.Players.Add(characterPlayer);
             }
+            
+            GameManager.Instance.AssignPlayersToCameras();
         }
 
         #endregion

@@ -112,4 +112,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PlayerSetupMenuPrefab>k__BackingField: {fileID: 5802575382212528202, guid: 11480993e11b2c74ea934788ff50433a, type: 3}
-  <input>k__BackingField: {fileID: 6572035540517138646}
+  <Input>k__BackingField: {fileID: 6572035540517138646}

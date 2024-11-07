@@ -57,8 +57,9 @@ namespace Player
             UpdateRayCast();
             UpdateCursorParentBasedOnGround();
         }
-        
+
         // Cursor-related methods
+
         #region Cursor
 
         /// <summary>
@@ -149,6 +150,7 @@ namespace Player
         #endregion
 
         // Pathfinding methods
+
         #region PathFinding
 
         /// <summary>
@@ -274,6 +276,7 @@ namespace Player
         #endregion
 
         // Ground detection methods
+
         #region GroundRayDetect
 
         /// <summary>
@@ -308,10 +311,11 @@ namespace Player
         }
 
         #endregion
-        
+
         // Utilities Methods
+
         #region Utilities Methods
-        
+
         /// <summary>
         /// Registers event handlers for selecting blocks and moving the cursor.
         /// </summary>
@@ -336,7 +340,7 @@ namespace Player
         {
             RayCastDown();
         }
-        
+
         /// <summary>
         /// Updates the player's parent object based on the ground status (moving or static).
         /// </summary>

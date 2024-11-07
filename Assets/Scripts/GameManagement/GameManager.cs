@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using MultiplayerSystem;
 using UnityEngine;
 
 namespace GameManagement
@@ -13,6 +15,9 @@ namespace GameManagement
 
         public static GameManager Instance;
         [field: SerializeField] public List<Transform> Pivots { get; private set; }
+
+        [field: SerializeField] public List<DynamicCamera> Cameras { get; private set; }
+        [field: SerializeField] public List<GameObject> Players { get; set; }
 
         #endregion
 
@@ -29,7 +34,18 @@ namespace GameManagement
                 Debug.LogError("There is another Game Manager in this scene !");
             }
         }
-        
+
+        public void AssignPlayersToCameras()
+        {
+            foreach (var camera in Cameras)
+            {
+                foreach (var player in Players)
+                {
+                    camera.Players.Add(player.transform);
+                }
+            }
+        }
+
         #endregion
     }
 }
