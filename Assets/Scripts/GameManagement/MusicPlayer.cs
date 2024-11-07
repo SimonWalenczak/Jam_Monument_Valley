@@ -1,27 +1,39 @@
-using System;
 using UnityEngine;
 
-public class MusicPlayer : MonoBehaviour
+namespace GameManagement
 {
-    public static MusicPlayer Instance;
-
-    [HideInInspector] public AudioSource AudioSource;
+    /// <summary>
+    /// Manages the audio playback for the game, ensuring that the music persists across scene transitions.
+    /// </summary>
+    public class MusicPlayer : MonoBehaviour
+    {
+        #region Properties
+        
+        public static MusicPlayer Instance;
+        public AudioSource AudioSource {get; private set;}
     
-    void Awake()
-    {
-        if (Instance == null)
+        #endregion
+        
+        #region Maethods
+        
+        void Awake()
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
-    private void Start()
-    {
-        AudioSource = GetComponent<AudioSource>();
+        private void Start()
+        {
+            AudioSource = GetComponent<AudioSource>();
+        }
+        
+        #endregion
     }
 }
