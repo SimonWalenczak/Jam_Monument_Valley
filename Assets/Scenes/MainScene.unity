@@ -3838,7 +3838,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 468905276344376616, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
-      insertIndex: 4
+      insertIndex: -1
       addedObject: {fileID: 882355863}
   m_SourcePrefab: {fileID: 100100000, guid: 126713c5534ff544fb76a6752c3fb4c0, type: 3}
 --- !u!4 &882355861 stripped
@@ -3863,10 +3863,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0704cb3b09eb7a84ca5d433ce119d70b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Ease>k__BackingField: 30
   _groupBlock: {fileID: 69520815}
   _movePosition: {x: 6, y: 3.5, z: -1}
   _moveDuration: 3
-  IsActive: 0
 --- !u!1 &908828628
 GameObject:
   m_ObjectHideFlags: 0

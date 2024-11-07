@@ -173,7 +173,7 @@ namespace Player
                 var blockButton = CurrentBlock.GetComponent<BlockButton>();
                 if (!blockButton.IsActive)
                 {
-                    blockButton.Active();
+                    blockButton.Activate();
                 }
             }
         }
