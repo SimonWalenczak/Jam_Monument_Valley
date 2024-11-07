@@ -465,19 +465,19 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7da30332bfad8cb4b9b92749535feb06, type: 3}
   - {fileID: 21300000, guid: 1cb043c2f0ede444db56e318bf91bbec, type: 3}
   - {fileID: 21300000, guid: a52a9ce32e6476640a755864976c275c, type: 3}
-  selectedCharacterIndex: 0
-  _titlePlayer: {fileID: 5565638541491004497}
-  _titlePlayerSprites:
+  _selectedCharacterIndex: 0
+  _playerTitleImage: {fileID: 5565638541491004497}
+  _playerTitleSprites:
   - {fileID: 21300000, guid: e32874c56c971344bbb5cd25df572302, type: 3}
   - {fileID: 21300000, guid: 3428e46f96a5bd746b749719f107f954, type: 3}
   - {fileID: 21300000, guid: cdcb37258c8d7194dbfb21a387805802, type: 3}
   - {fileID: 21300000, guid: 03d696aaf690a8643ab91799280d0bfa, type: 3}
-  _meshCharacterPlayers:
+  _characterMeshList:
   - {fileID: 7275020400147095786, guid: acff580b7c8ca854aba5835505192f6b, type: 3}
   - {fileID: 951481966831506230, guid: d3c8b388b698f2a489d1d12bb2d29e46, type: 3}
   - {fileID: 2314860665297888829, guid: fd1eb28a80ea7d846a548e60cfe288d1, type: 3}
   - {fileID: 7872082763232303777, guid: bbf5c7b259f513e4a8dff3516ecb6dfa, type: 3}
-  _actualMesh: {fileID: 7275020400147095786, guid: acff580b7c8ca854aba5835505192f6b, type: 3}
+  _currentCharacterMesh: {fileID: 7275020400147095786, guid: acff580b7c8ca854aba5835505192f6b, type: 3}
   _readyPanel: {fileID: 8604917076379993584}
   _menuPanel: {fileID: 7156995453722825386}
 --- !u!1 &6674685588761621270
