@@ -1,12 +1,18 @@
-using Player;
 using UnityEngine;
+using Player;
 
-public class CharacterMultiplayerManager : MonoBehaviour
+namespace MultiplayerSystem
 {
-    #region Properties
+    /// <summary>
+    /// Manages the multiplayer character, including player manager and input management.
+    /// </summary>
+    public class CharacterMultiplayerManager : MonoBehaviour
+    {
+        #region Properties
 
-    [field: SerializeField] public PlayerManager PlayerManager { get; private set; }
-    [field: SerializeField] public InputManagement InputManagement { get; private set; }
+        [field: SerializeField] public PlayerManager PlayerManager { get; private set; }
+        [field: SerializeField] public InputManagement InputManagement { get; private set; }
 
-    #endregion
+        #endregion
+    }
 }
