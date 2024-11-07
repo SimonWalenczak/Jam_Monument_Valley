@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
 using UnityEngine;
+using DG.Tweening;
 
 namespace Player
 {
+    /// <summary>
+    /// Controls player movement, cursor interactions, and pathfinding based on user input. 
+    /// Manages raycasting to detect ground blocks and updates player’s position accordingly.
+    /// </summary>
     public class PlayerController : MonoBehaviour
     {
         #region Properties
@@ -53,35 +57,13 @@ namespace Player
             UpdateRayCast();
             UpdateCursorParentBasedOnGround();
         }
-
-        // Register event handlers
-        private void RegisterEvents()
-        {
-            OnSelectBlock += SelectBlock;
-            OnMoveCursor += MoveCursor;
-        }
-
-        // Raycasting and ground detection
-        private void PerformInitialRayCast()
-        {
-            RayCastDown();
-        }
-
-        private void UpdateRayCast()
-        {
-            RayCastDown();
-        }
-
-        private void UpdateCursorParentBasedOnGround()
-        {
-            transform.parent.parent = PlayerManagerRef.CurrentBlock.MovingGround
-                ? PlayerManagerRef.CurrentBlock.transform.parent
-                : null;
-        }
-
+        
         // Cursor-related methods
         #region Cursor
 
+        /// <summary>
+        /// Selects a block for the player to move toward, setting up pathfinding and animations.
+        /// </summary>
         private void SelectBlock()
         {
             if (PlayerManagerRef.IsWalking || PlayerManagerRef.IsDefineTargetBlock || !PlayerManagerRef.CanWalk) return;
@@ -97,11 +79,17 @@ namespace Player
             PlayIndicatorAnimation();
         }
 
+        /// <summary>
+        /// Positions the indicator on the currently selected block.
+        /// </summary>
         private void PositionIndicatorOnSelectedBlock()
         {
             PlayerManagerRef.Indicator.position = PlayerManagerRef.SelectedBlock.GetWalkPoint();
         }
 
+        /// <summary>
+        /// Plays an animation on the block selection indicator.
+        /// </summary>
         private void PlayIndicatorAnimation()
         {
             Sequence s = DOTween.Sequence();
@@ -113,6 +101,10 @@ namespace Player
             s.Append(indicatorRenderer.DOColor(Color.clear, 0.3f));
         }
 
+        /// <summary>
+        /// Moves the cursor to a new target block based on the given index of possible paths.
+        /// </summary>
+        /// <param name="index">Index of the target path in the current block's possible paths.</param>
         private void MoveCursor(int index)
         {
             if (PlayerManagerRef.IsMovingCursor || !PlayerManagerRef.CanMoveCursor) return;
@@ -131,6 +123,10 @@ namespace Player
             }
         }
 
+        /// <summary>
+        /// Updates the selected block to the specified target, repositioning the cursor.
+        /// </summary>
+        /// <param name="targetBlock">Target block to move the cursor to.</param>
         private void UpdateSelectedBlock(Transform targetBlock)
         {
             PlayerManagerRef.SelectedBlock = targetBlock.GetComponent<BlockController>();
@@ -141,6 +137,9 @@ namespace Player
             );
         }
 
+        /// <summary>
+        /// Resets the cursor movement status after a short delay.
+        /// </summary>
         private IEnumerator ResetCursorTimer()
         {
             yield return new WaitForSeconds(0.1f);
@@ -152,6 +151,9 @@ namespace Player
         // Pathfinding methods
         #region PathFinding
 
+        /// <summary>
+        /// Initiates pathfinding to the selected block by exploring available paths.
+        /// </summary>
         private void FindPath()
         {
             List<Transform> nextCubes = GetNextCubes();
@@ -161,6 +163,10 @@ namespace Player
             BuildPath();
         }
 
+        /// <summary>
+        /// Retrieves a list of the next reachable cubes based on active paths.
+        /// </summary>
+        /// <returns>List of next target cubes.</returns>
         private List<Transform> GetNextCubes()
         {
             var nextCubes = new List<Transform>();
@@ -177,6 +183,11 @@ namespace Player
             return nextCubes;
         }
 
+        /// <summary>
+        /// Recursively explores cubes to build a path, tracking visited cubes.
+        /// </summary>
+        /// <param name="nextCubes">List of reachable cubes to explore.</param>
+        /// <param name="visitedCubes">List of already visited cubes.</param>
         private void ExploreCube(List<Transform> nextCubes, List<Transform> visitedCubes)
         {
             while (nextCubes.Any())
@@ -199,6 +210,9 @@ namespace Player
             }
         }
 
+        /// <summary>
+        /// Builds the final path from the current block to the selected target block.
+        /// </summary>
         private void BuildPath()
         {
             Transform cube = PlayerManagerRef.ClickedCube.transform;
@@ -220,6 +234,9 @@ namespace Player
             FollowPath();
         }
 
+        /// <summary>
+        /// Moves the player along the calculated path to the target block.
+        /// </summary>
         private void FollowPath()
         {
             Sequence s = DOTween.Sequence();
@@ -239,6 +256,9 @@ namespace Player
             s.AppendCallback(ClearPath);
         }
 
+        /// <summary>
+        /// Clears the path data after reaching the target block, resetting all temporary path properties.
+        /// </summary>
         private void ClearPath()
         {
             foreach (Transform t in FinalPath)
@@ -256,6 +276,9 @@ namespace Player
         // Ground detection methods
         #region GroundRayDetect
 
+        /// <summary>
+        /// Casts a ray downward to detect the ground block below the player, updating the current block reference.
+        /// </summary>
         private void RayCastDown()
         {
             Ray playerRay = new Ray(transform.GetChild(0).position, -transform.up);
@@ -275,10 +298,53 @@ namespace Player
             }
         }
 
+        /// <summary>
+        /// Draws a visual representation of the downward ray in the Unity editor.
+        /// </summary>
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;
             Gizmos.DrawRay(new Ray(transform.GetChild(0).position, -transform.up));
+        }
+
+        #endregion
+        
+        // Utilities Methods
+        #region Utilities Methods
+        
+        /// <summary>
+        /// Registers event handlers for selecting blocks and moving the cursor.
+        /// </summary>
+        private void RegisterEvents()
+        {
+            OnSelectBlock += SelectBlock;
+            OnMoveCursor += MoveCursor;
+        }
+
+        /// <summary>
+        /// Initializes a raycast to detect the initial ground block below the player.
+        /// </summary>
+        private void PerformInitialRayCast()
+        {
+            RayCastDown();
+        }
+
+        /// <summary>
+        /// Continuously updates the raycast to check the ground below the player.
+        /// </summary>
+        private void UpdateRayCast()
+        {
+            RayCastDown();
+        }
+        
+        /// <summary>
+        /// Updates the player's parent object based on the ground status (moving or static).
+        /// </summary>
+        private void UpdateCursorParentBasedOnGround()
+        {
+            transform.parent.parent = PlayerManagerRef.CurrentBlock.MovingGround
+                ? PlayerManagerRef.CurrentBlock.transform.parent
+                : null;
         }
 
         #endregion

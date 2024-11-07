@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Player
 {
+    /// <summary>
+    /// Manages the player's state, movement, cursor handling, and interactions with the game environment.
+    /// Coordinates with other components like InputManagement, PlayerController, and Pivot for player actions.
+    /// </summary>
     public class PlayerManager : MonoBehaviour
     {
         #region Properties
@@ -85,22 +89,34 @@ namespace Player
             HandleCursorMovement();
         }
 
+        /// <summary>
+        /// Sets up the Animator component by finding it in the player's parent object.
+        /// </summary>
         private void InitializeAnimator()
         {
             _animator = transform.parent.GetComponentInChildren<Animator>();
         }
 
+        /// <summary>
+        /// Sets the initial state of player properties, such as enabling walking.
+        /// </summary>
         private void SetInitialState()
         {
             CanWalk = true;
         }
 
+        /// <summary>
+        /// Detaches the indicator and cursor objects from the player's transform for independent control.
+        /// </summary>
         private void DetachIndicatorAndCursor()
         {
             Indicator.transform.parent = null;
             Cursor.transform.parent = null;
         }
 
+        /// <summary>
+        /// Sets the reference for the Pivot object based on the player index, and assigns the PlayerManager reference to the Pivot.
+        /// </summary>
         private void SetPivotReference()
         {
             int playerIndex = InputManagementProperty.PlayerConfig.NumPlayer;
@@ -108,16 +124,25 @@ namespace Player
             PivotProperty.PlayerManagerRef = this;
         }
 
+        /// <summary>
+        /// Updates the animator's "IsWalking" parameter based on the player's walking state.
+        /// </summary>
         private void UpdateAnimatorState()
         {
             _animator.SetBool("IsWalking", IsWalking);
         }
 
+        /// <summary>
+        /// Sets the availability of cursor movement based on the rotation state of the Pivot object.
+        /// </summary>
         private void UpdateCursorMovementAvailability()
         {
             CanMoveCursor = !PivotProperty.IsRotating;
         }
 
+        /// <summary>
+        /// Checks if the selected block is the current block, updating the target block status.
+        /// </summary>
         private void UpdateTargetBlockStatus()
         {
             if (IsStarted)
@@ -126,6 +151,9 @@ namespace Player
             }
         }
 
+        /// <summary>
+        /// Updates the cursor's parent transform based on the ground's movement status for both current and selected blocks.
+        /// </summary>
         private void UpdateCursorParent()
         {
             if (!IsStarted) return;
@@ -133,8 +161,13 @@ namespace Player
             Cursor.transform.parent = SelectedBlock.MovingGround ? SelectedBlock.transform : null;
         }
 
+        /// <summary>
+        /// Activates any button on the current block, if present, allowing for interaction.
+        /// </summary>
         private void ActivateCurrentBlockButton()
         {
+            if (IsStarted == false) return;
+
             if (CurrentBlock.IsButton)
             {
                 var blockButton = CurrentBlock.GetComponent<BlockButton>();
@@ -145,6 +178,9 @@ namespace Player
             }
         }
 
+        /// <summary>
+        /// Resets the cursor's position to match the current block, ensuring it aligns with the block's walk point offset.
+        /// </summary>
         public void ResetCursorPosition()
         {
             SelectedBlock = CurrentBlock;
@@ -155,6 +191,9 @@ namespace Player
             );
         }
 
+        /// <summary>
+        /// Handles cursor movement and block selection based on user input, invoking appropriate actions or rotations.
+        /// </summary>
         private void HandleCursorMovement()
         {
             if (InputManagementProperty.Inputs.MoveNorth)
