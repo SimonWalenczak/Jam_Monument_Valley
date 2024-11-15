@@ -263,6 +263,7 @@ namespace Player
         /// </summary>
         private void ClearPath()
         {
+            //if(FinalPath[FinalPath.Count-1].GetComponent<BlockController>().)
             foreach (Transform t in FinalPath)
             {
                 t.GetComponent<BlockController>().PreviousBlock = null;

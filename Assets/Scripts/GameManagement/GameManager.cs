@@ -19,6 +19,8 @@ namespace GameManagement
         [field: SerializeField] public List<DynamicCamera> Cameras { get; private set; }
         [field: SerializeField] public List<GameObject> Players { get; set; }
 
+        [SerializeField] private int _nbPlayerFinished = 0;
+
         #endregion
 
         #region Methods
@@ -44,6 +46,11 @@ namespace GameManagement
                     camera.Players.Add(player.transform);
                 }
             }
+        }
+
+        public void AddFinishedPlayer()
+        {
+            _nbPlayerFinished++;
         }
 
         #endregion
