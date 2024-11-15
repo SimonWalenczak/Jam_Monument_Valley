@@ -15,12 +15,13 @@ public class BlockController : MonoBehaviour
     [field: SerializeField] public bool MovingGround { get; private set; }
     [field: SerializeField] public bool IsButton { get; private set; }
     [field: SerializeField] public bool DontRotate { get; private set; }
-
+    [field: SerializeField] public bool IsFinalBlock { get; private set; }
+    
     [field: Space, Header("Offsets"), SerializeField]
     public float WalkPointOffset { get; private set; }
 
     [field: SerializeField] public float StairOffset { get; private set; }
-
+    
     #endregion
 
     #region Methods

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+using GameManagement;
 
 namespace Player
 {
@@ -263,7 +264,12 @@ namespace Player
         /// </summary>
         private void ClearPath()
         {
-            //if(FinalPath[FinalPath.Count-1].GetComponent<BlockController>().)
+            if (PlayerManagerRef.ClickedCube.IsFinalBlock)
+            {
+                PlayerManagerRef.CanWalk = false;
+                GameManager.Instance.AddFinishedPlayer();
+            }
+            
             foreach (Transform t in FinalPath)
             {
                 t.GetComponent<BlockController>().PreviousBlock = null;

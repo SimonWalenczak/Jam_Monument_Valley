@@ -58,8 +58,6 @@ namespace Level
                 
                 GameManager.Instance.Players.Add(characterPlayer);
             }
-            
-            GameManager.Instance.AssignPlayersToCameras();
         }
 
         #endregion

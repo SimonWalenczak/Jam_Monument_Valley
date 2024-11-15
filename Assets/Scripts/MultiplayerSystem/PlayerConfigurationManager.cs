@@ -128,7 +128,7 @@ namespace MultiplayerSystem
         {
             MusicPlayer.Instance.AudioSource.DOFade(0, 3);
             yield return new WaitForSeconds(1);
-            _fader.FadeOut();
+            _fader.LaunchFadeOutLobby();
         }
 
         #endregion

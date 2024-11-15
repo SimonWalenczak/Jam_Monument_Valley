@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using MultiplayerSystem;
 using UnityEngine;
@@ -15,12 +16,11 @@ namespace GameManagement
 
         public static GameManager Instance;
         [field: SerializeField] public List<Transform> Pivots { get; private set; }
-
-        [field: SerializeField] public List<DynamicCamera> Cameras { get; private set; }
         [field: SerializeField] public List<GameObject> Players { get; set; }
+        [field: SerializeField] public Fader Fader { get; private set; }
 
         [SerializeField] private int _nbPlayerFinished = 0;
-
+        
         #endregion
 
         #region Methods
@@ -37,22 +37,16 @@ namespace GameManagement
             }
         }
 
-        public void AssignPlayersToCameras()
-        {
-            foreach (var camera in Cameras)
-            {
-                foreach (var player in Players)
-                {
-                    camera.Players.Add(player.transform);
-                }
-            }
-        }
-
         public void AddFinishedPlayer()
         {
             _nbPlayerFinished++;
-        }
 
+            if (_nbPlayerFinished >= 2)
+            {
+                Fader.LaunchFadeOutMainScene();
+            }
+        }
+        
         #endregion
     }
 }

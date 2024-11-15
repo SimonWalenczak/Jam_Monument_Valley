@@ -14,7 +14,8 @@ namespace GameManagement
     {
         #region Properties
     
-        [SerializeField] private float _timeToFade;
+        [SerializeField] private float _timeToFadeIn;
+        [SerializeField] private float _timeToFadeOut;
 
         #endregion
 
@@ -22,30 +23,49 @@ namespace GameManagement
     
         private void Start()
         {
-            GetComponent<Image>().DOFade(0, _timeToFade);
+            StartCoroutine(FadeIn());
+        }
+
+        IEnumerator FadeIn()
+        {
+            yield return new WaitForSeconds(_timeToFadeIn);
+            GetComponent<Image>().DOFade(0, _timeToFadeOut);
         }
 
         /// <summary>
         /// Triggers the fade-out effect and loads the scene after the fade completes.
         /// </summary>
-        public void FadeOut()
+        public void LaunchFadeOutLobby()
         {
-            StartCoroutine(Fade());
+            StartCoroutine(FadeOutLobby());
+        }
+        
+        public void LaunchFadeOutMainScene()
+        {
+            StartCoroutine(FadeOutMainScene());
         }
 
         /// <summary>
         /// Performs the fade-out effect and then loads the "MainScene".
         /// </summary>
         /// <returns>Coroutine for delaying the scene load after fade-out.</returns>
-        private IEnumerator Fade()
+        private IEnumerator FadeOutLobby()
         {
-            GetComponent<Image>().DOFade(1, _timeToFade);
+            GetComponent<Image>().DOFade(1, _timeToFadeOut);
 
-            yield return new WaitForSeconds(_timeToFade);
+            yield return new WaitForSeconds(_timeToFadeOut);
 
             SceneManager.LoadScene("MainScene");
         }
 
+        private IEnumerator FadeOutMainScene()
+        {
+            GetComponent<Image>().DOFade(1, _timeToFadeOut);
+
+            yield return new WaitForSeconds(_timeToFadeOut);
+
+            SceneManager.LoadScene("MainMenu");
+        }
         #endregion
     }
 }
