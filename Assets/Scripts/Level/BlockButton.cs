@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using GameManagement;
 using Level;
 
 /// <summary>
@@ -10,7 +11,7 @@ public class BlockButton : MonoBehaviour
     #region Properties
 
     [field: SerializeField] public Ease Ease { get; private set; }
-    public bool IsActive { get; private set; }
+    [field: SerializeField] public bool IsActive { get; private set; }
 
     [SerializeField] private GameObject _groupBlock;
     [SerializeField] private Vector3 _movePosition;
@@ -26,6 +27,7 @@ public class BlockButton : MonoBehaviour
     public void Activate()
     {
         IsActive = true;
+        GameManager.Instance.AudioManager.PlaySoundFX(0);
         MoveGroupBlock();
         UpdatePivotRotation();
     }

@@ -5,13 +5,14 @@ namespace Level
 {
     public class LightRotationPingPong : MonoBehaviour
     {
-        [SerializeField] private Light _light;
+        [SerializeField] private Transform _light;
         [SerializeField] private Vector3 _lightRotationEnd;
         [SerializeField] private float _duration = 2f;
+        [SerializeField] private Ease _ease;
 
         void Start()
         {
-            _light.transform.DORotate(_lightRotationEnd, _duration).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+            _light.DORotate(_lightRotationEnd, _duration).SetLoops(-1, LoopType.Yoyo).SetEase(_ease);
         }
     }
 }

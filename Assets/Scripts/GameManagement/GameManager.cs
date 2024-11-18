@@ -15,6 +15,8 @@ namespace GameManagement
         #region Properties
 
         public static GameManager Instance;
+        
+        [field: SerializeField] public AudioManager AudioManager { get; private set; }
         [field: SerializeField] public List<Transform> Pivots { get; private set; }
         [field: SerializeField] public List<GameObject> Players { get; set; }
         [field: SerializeField] public Fader Fader { get; private set; }
